@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAT Ceramics – Handgemachte Keramik</title>
+  <meta name="description" content="BAT Ceramics – handgemachte Keramik, Einzelstücke und kleine Serien.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --chalk:#F4F0E8;
+      --taupe:#D8CDBD;
+      --clay:#B47755;
+      --sage:#9A9A80;
+      --charcoal:#292722;
+
+      --black:var(--charcoal);
+      --white:var(--chalk);
+      --gray:#6F685E;
+      --light:#E8E0D4;
+      --shadow:0 18px 45px rgba(41,39,34,.12);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:80px}
+    body{
+      margin:0;
+      overflow-x:hidden;
+      background:var(--chalk);
+      color:var(--charcoal);
+      font-family:"DM Sans",Arial,Helvetica,sans-serif;
+      line-height:1.6;
+    }
+    body.menu-open,
+    body.lightbox-open{overflow:hidden}
+    a{color:inherit}
+    img{display:block;max-width:100%}
+    button{font:inherit}
+
+    /* Festes Hintergrundlogo */
+    .background-logo{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      user-select:none;
+      overflow:visible;
+    }
+    .background-logo img{
+      width:106vw;
+      max-width:none;
+      max-height:72vh;
+      flex:0 0 auto;
+      margin:0;
+      object-fit:contain;
+      opacity:1;
+      filter:none;
+      transform:none;
+    }
+
+    .page{
+      position:relative;
+      z-index:1;
+    }
+
+    /* Header */
+    .site-header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:1000;
+      min-height:76px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      padding:14px 18px;
+      background:rgba(244,240,232,.97);
+      border-bottom:1px solid rgba(41,39,34,.12);
+      box-shadow:0 8px 24px rgba(41,39,34,.08);
+      backdrop-filter:blur(12px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      color:var(--charcoal);
+      text-decoration:none;
+      flex:0 0 auto;
+    }
+
+    .brand-logo{
+      width:46px;
+      height:46px;
+      object-fit:contain;
+      border-radius:50%;
+      background:var(--chalk);
+    }
+
+    .brand-fallback{
+      width:46px;
+      height:46px;
+      display:none;
+      place-items:center;
+      border-radius:50%;
+      background:var(--chalk);
+      color:var(--charcoal);
+      font-size:.72rem;
+      font-weight:900;
+    }
+
+    .brand-name{
+      display:block;
+      font-size:1.12rem;
+      font-weight:900;
+      line-height:1;
+    }
+
+    .brand-subtitle{
+      display:block;
+      margin-top:4px;
+      color:var(--clay);
+      font-size:.68rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      margin-left:auto;
+    }
+
+    .header-socials{
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+
+    .header-social-link{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(41,39,34,.18);
+      border-radius:50%;
+      background:rgba(216,205,189,.55);
+      color:var(--charcoal);
+      text-decoration:none;
+      transition:transform .2s, background .2s, color .2s;
+    }
+
+    .header-social-link:hover,
+    .header-social-link:focus-visible{
+      transform:translateY(-2px);
+      background:var(--clay);
+      color:var(--chalk);
+      outline:none;
+    }
+
+    .header-social-link svg{
+      width:17px;
+      height:17px;
+      fill:currentColor;
+    }
+
+    .menu-button{
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border:1px solid rgba(41,39,34,.20);
+      border-radius:50%;
+      background:var(--taupe);
+      cursor:pointer;
+    }
+
+    .menu-icon,
+    .menu-icon::before,
+    .menu-icon::after{
+      width:23px;
+      height:2px;
+      display:block;
+      position:relative;
+      background:var(--charcoal);
+      content:"";
+      transition:.25s;
+    }
+
+    .menu-icon::before{position:absolute;top:-7px}
+    .menu-icon::after{position:absolute;top:7px}
+    .menu-button[aria-expanded="true"] .menu-icon{background:transparent}
+    .menu-button[aria-expanded="true"] .menu-icon::before{top:0;transform:rotate(45deg)}
+    .menu-button[aria-expanded="true"] .menu-icon::after{top:0;transform:rotate(-45deg)}
+
+    .menu-panel{
+      position:fixed;
+      top:76px;
+      left:0;
+      right:0;
+      z-index:999;
+      max-height:calc(100vh - 76px);
+      overflow-y:auto;
+      background:rgba(244,240,232,.99);
+      box-shadow:0 24px 45px rgba(41,39,34,.16);
+      transform:translateY(-120%);
+      opacity:0;
+      visibility:hidden;
+      transition:.28s;
+    }
+
+    .menu-panel.open{
+      transform:translateY(0);
+      opacity:1;
+      visibility:visible;
+    }
+
+    .menu-panel a{
+      display:block;
+      padding:18px 22px;
+      color:var(--charcoal);
+      text-decoration:none;
+      border-top:1px solid rgba(41,39,34,.10);
+      font-weight:800;
+    }
+
+    .menu-panel a:hover,
+    .menu-panel a:focus-visible{
+      background:rgba(216,205,189,.42);
+      outline:none;
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      min-height:100svh;
+      display:grid;
+      align-items:center;
+      overflow:hidden;
+      color:var(--chalk);
+      background:var(--charcoal);
+    }
+
+    .hero-slides,
+    .hero-slide{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+    }
+
+    .hero-slide{
+      opacity:0;
+      background-size:cover;
+      background-position:center;
+      transform:scale(1.03);
+      transition:opacity 1s ease, transform 6s linear;
+    }
+
+    .hero-slide.active{
+      opacity:1;
+      transform:scale(1.10);
+    }
+
+    .hero-video-slide{
+      background:var(--charcoal);
+    }
+
+    .hero-video-slide video{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .hero-slide-1{
+      background-image:
+        linear-gradient(rgba(41,39,34,.16),rgba(41,39,34,.16)),
+        url("hero-1.jpeg");
+    }
+
+    .hero-slide-2{
+      background-image:
+        linear-gradient(rgba(41,39,34,.16),rgba(41,39,34,.16)),
+        url("hero-2.jpeg");
+    }
+
+    .hero-slide-3{
+      background-image:
+        linear-gradient(rgba(41,39,34,.16),rgba(41,39,34,.16)),
+        url("hero-3.jpeg");
+    }
+
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(90deg,rgba(41,39,34,.84),rgba(41,39,34,.44) 58%,rgba(41,39,34,.18)),
+        linear-gradient(180deg,rgba(41,39,34,.10),rgba(41,39,34,.40));
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:800px;
+      padding:126px 18px 88px;
+    }
+
+    .eyebrow{
+      margin:0;
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .hero h1{
+      margin:10px 0 18px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:clamp(3.4rem,14vw,7.6rem);
+      font-weight:500;
+      line-height:.9;
+      letter-spacing:-.055em;
+    }
+
+    .hero h1 em{
+      display:block;
+      font-style:normal;
+      color:var(--chalk);
+    }
+
+    .hero p{
+      max-width:620px;
+      color:rgba(244,240,232,.92);
+      font-size:1.08rem;
+    }
+
+    .hero-dots{
+      position:absolute;
+      left:18px;
+      bottom:24px;
+      z-index:3;
+      display:flex;
+      gap:8px;
+    }
+
+    .hero-dot{
+      width:11px;
+      height:11px;
+      border:0;
+      border-radius:50%;
+      background:rgba(244,240,232,.42);
+      cursor:pointer;
+    }
+
+    .hero-dot.active{background:var(--chalk)}
+
+    /* Allgemein */
+    section{
+      position:relative;
+      padding:68px 18px;
+      background:rgba(244,240,232,.78);
+    }
+
+    .section-kicker{
+      margin:0 0 8px;
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.15em;
+      text-align:center;
+      text-transform:uppercase;
+    }
+
+    .section-title{
+      max-width:900px;
+      margin:0 auto;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:clamp(2.3rem,8vw,4.5rem);
+      font-weight:500;
+      line-height:1.08;
+      text-align:center;
+    }
+
+    .section-lead{
+      max-width:760px;
+      margin:16px auto 34px;
+      color:var(--gray);
+      text-align:center;
+    }
+
+    .workshop-note{
+      max-width:760px;
+      margin:12px auto 34px;
+      font-family:"Caveat",cursive;
+      font-size:clamp(1.55rem,4vw,2.15rem);
+      line-height:1.15;
+      text-align:center;
+      color:var(--clay);
+    }
+
+    #ueber-uns .intro-grid{
+      align-items:stretch;
+    }
+
+    #ueber-uns .intro-card{
+      min-height:245px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      border-radius:44px 64px 50px 70px;
+    }
+
+    #ueber-uns .intro-card:first-child{
+      justify-content:flex-start;
+    }
+
+    #ueber-uns .intro-card:nth-child(2){
+      background:#E8E1D6;
+      border-radius:68px 42px 72px 48px;
+    }
+
+    #ueber-uns .intro-card:nth-child(3){
+      background:#E8D8CD;
+      border-radius:50px 72px 44px 66px;
+    }
+
+    #ueber-uns .intro-card:nth-child(4){
+      background:#DADACB;
+      border-radius:70px 48px 64px 42px;
+    }
+
+    #ueber-uns .intro-card strong{
+      color:var(--charcoal);
+      font-weight:600;
+      line-height:1.05;
+    }
+
+    #ueber-uns .intro-card{
+      line-height:1.55;
+    }
+
+    .about-accordion{
+      max-width:980px;
+      margin:34px auto 0;
+    }
+
+    .about-accordion details{
+      margin-bottom:16px;
+      border:1px solid rgba(180,119,85,.24);
+      border-radius:28px;
+      background:rgba(244,240,232,.94);
+      box-shadow:0 12px 28px rgba(41,39,34,.07);
+      overflow:hidden;
+    }
+
+    .about-accordion details:nth-child(2){
+      background:#E8E1D6;
+    }
+
+    .about-accordion details:nth-child(3){
+      background:#DADACB;
+    }
+
+    .about-accordion summary{
+      position:relative;
+      padding:22px 58px 22px 24px;
+      color:var(--charcoal);
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:clamp(1.45rem,3vw,2rem);
+      font-weight:600;
+      line-height:1.15;
+      cursor:pointer;
+      list-style:none;
+    }
+
+    .about-accordion summary::-webkit-details-marker{display:none}
+
+    .about-accordion summary::after{
+      content:"+";
+      position:absolute;
+      top:50%;
+      right:24px;
+      transform:translateY(-50%);
+      color:var(--clay);
+      font-family:"DM Sans",Arial,sans-serif;
+      font-size:1.7rem;
+      font-weight:500;
+    }
+
+    .about-accordion details[open] summary::after{content:"–"}
+
+    .about-accordion-content{
+      padding:0 24px 22px;
+      color:var(--gray);
+      line-height:1.7;
+    }
+
+    .about-accordion-content p{
+      margin:0 0 12px;
+      padding:0;
+      color:inherit;
+    }
+
+    .about-accordion-content p:last-child{margin-bottom:0}
+
+    .button{
+      display:inline-block;
+      width:100%;
+      margin-top:9px;
+      padding:14px 22px;
+      border:2px solid var(--charcoal);
+      border-radius:999px;
+      background:var(--charcoal);
+      color:var(--chalk);
+      text-align:center;
+      text-decoration:none;
+      font-weight:900;
+      transition:.2s;
+    }
+
+    .button:hover{
+      transform:translateY(-2px);
+      background:var(--clay);
+      border-color:var(--clay);
+    }
+
+    .button.secondary{
+      background:transparent;
+      color:var(--charcoal);
+    }
+
+    .hero .button.secondary{
+      border-color:var(--chalk);
+      color:var(--chalk);
+      background:rgba(244,240,232,.08);
+    }
+
+    .intro-grid,
+    .product-grid,
+    .steps-grid{
+      display:grid;
+      gap:22px;
+      max-width:1180px;
+      margin:34px auto 0;
+    }
+
+    .intro-card,
+    .step-card{
+      padding:24px;
+      border:1px solid rgba(180,119,85,.18);
+      border-radius:24px;
+      background:rgba(216,205,189,.92);
+      box-shadow:var(--shadow);
+    }
+
+    .intro-card strong,
+    .step-card strong{
+      display:block;
+      margin-bottom:7px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.4rem;
+    }
+
+    .product-card{
+      overflow:hidden;
+      border:1px solid var(--taupe);
+      border-radius:28px;
+      background:rgba(244,240,232,.96);
+      box-shadow:var(--shadow);
+    }
+
+    .product-photo{
+      aspect-ratio:4/3;
+      overflow:hidden;
+      background:#E8E0D4;
+      cursor:zoom-in;
+    }
+
+    .product-photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .4s;
+    }
+
+    .product-photo:hover img{transform:scale(1.04)}
+
+    .product-content{padding:22px}
+    .product-tag{
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    .product-content h3{
+      margin:6px 0 9px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.65rem;
+      font-weight:500;
+    }
+
+    .price{
+      margin:12px 0;
+      font-size:1.38rem;
+      font-weight:900;
+    }
+
+    .note{
+      color:var(--gray);
+      font-size:.88rem;
+    }
+
+    .featured-grid{
+      display:grid;
+      gap:22px;
+      max-width:1180px;
+      margin:34px auto 0;
+    }
+
+    .featured-card{
+      overflow:hidden;
+      border:1px solid var(--taupe);
+      border-radius:28px;
+      background:rgba(244,240,232,.96);
+      box-shadow:var(--shadow);
+    }
+
+    .featured-media{
+      position:relative;
+      display:block;
+      aspect-ratio:4/3;
+      overflow:hidden;
+      background:#E8E0D4;
+      color:var(--chalk);
+      text-decoration:none;
+    }
+
+    .featured-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .4s ease;
+    }
+
+    .featured-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,transparent 50%,rgba(41,39,34,.58));
+      pointer-events:none;
+    }
+
+    .featured-media:hover img,
+    .featured-media:focus-visible img{transform:scale(1.045)}
+
+    .video-badge{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      background:rgba(244,240,232,.94);
+      color:var(--charcoal);
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.04em;
+    }
+
+    .video-badge svg{
+      width:18px;
+      height:18px;
+      fill:currentColor;
+    }
+
+    .featured-content{padding:22px}
+    .featured-content h3{
+      margin:6px 0 9px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.85rem;
+      font-weight:600;
+      line-height:1.05;
+    }
+
+    .collection-section{background:rgba(216,205,189,.48)}
+
+    .collection-toolbar{
+      max-width:1180px;
+      margin:34px auto 26px;
+      padding:20px;
+      border:1px solid rgba(180,119,85,.22);
+      border-radius:24px;
+      background:rgba(244,240,232,.88);
+      box-shadow:0 10px 26px rgba(41,39,34,.06);
+    }
+
+    .filter-block + .filter-block{margin-top:18px}
+    .filter-label{
+      display:block;
+      margin-bottom:9px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.2rem;
+      font-weight:700;
+    }
+
+    .filter-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .filter-button{
+      padding:9px 13px;
+      border:1px solid var(--sage);
+      border-radius:999px;
+      background:transparent;
+      color:var(--charcoal);
+      cursor:pointer;
+      font-size:.86rem;
+      font-weight:800;
+      transition:.2s;
+    }
+
+    .filter-button:hover,
+    .filter-button:focus-visible,
+    .filter-button.active{
+      border-color:var(--charcoal);
+      background:var(--charcoal);
+      color:var(--chalk);
+    }
+
+    .collection-grid{
+      display:grid;
+      gap:22px;
+      max-width:1180px;
+      margin:0 auto;
+    }
+
+    details.collection-card{
+      margin:0;
+      overflow:hidden;
+      border:1px solid var(--taupe);
+      border-radius:26px;
+      background:rgba(244,240,232,.97);
+      box-shadow:var(--shadow);
+    }
+
+    details.collection-card[hidden]{display:none}
+
+    .collection-summary{
+      display:grid;
+      grid-template-columns:130px minmax(0,1fr) auto;
+      gap:18px;
+      align-items:center;
+      padding:0;
+      overflow:hidden;
+    }
+
+    .collection-summary::after{
+      content:"Details +";
+      align-self:center;
+      margin-right:18px;
+      color:var(--clay);
+      font-size:.78rem;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+
+    details.collection-card[open] .collection-summary::after{content:"Details –"}
+
+    .collection-image{
+      display:block;
+      width:130px;
+      height:130px;
+      overflow:hidden;
+      background:#E8E0D4;
+    }
+
+    .collection-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .35s ease;
+    }
+
+    .collection-summary:hover .collection-image img{transform:scale(1.04)}
+
+    .collection-summary-content{
+      display:flex;
+      min-width:0;
+      flex-direction:column;
+      padding:18px 0;
+    }
+
+    .collection-summary-content strong{
+      margin:4px 0 3px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.55rem;
+      line-height:1.05;
+    }
+
+    .collection-price{font-weight:900}
+
+    .collection-details{
+      padding:20px 22px 24px;
+      border-top:1px solid rgba(180,119,85,.18);
+    }
+
+    .collection-details p{
+      margin:0 0 10px;
+      padding:0;
+      color:var(--gray);
+    }
+
+    .collection-details p strong{color:var(--charcoal)}
+
+    .product-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .product-actions .button{margin:0}
+
+    .demo-product{
+      outline:1px dashed rgba(180,119,85,.35);
+      outline-offset:-7px;
+    }
+
+    .collection-empty{
+      max-width:1180px;
+      margin:26px auto 0;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(244,240,232,.9);
+      text-align:center;
+    }
+
+    .purchase-note{
+      max-width:900px;
+      margin:30px auto 0;
+      padding:18px 20px;
+      border-left:4px solid var(--clay);
+      border-radius:0 18px 18px 0;
+      background:rgba(244,240,232,.9);
+      color:var(--gray);
+      font-size:.92rem;
+    }
+
+    .purchase-note strong{color:var(--charcoal)}
+
+    .process{
+      background:rgba(216,205,189,.58);
+    }
+
+    .faq{
+      max-width:900px;
+      margin:34px auto 0;
+    }
+
+    details{
+      margin-bottom:13px;
+      border:1px solid var(--taupe);
+      border-radius:18px;
+      background:rgba(244,240,232,.96);
+      box-shadow:0 8px 20px rgba(41,39,34,.05);
+    }
+
+    summary{
+      padding:18px 20px;
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+    }
+
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"+";float:right;font-size:1.4rem}
+    details[open] summary::after{content:"–"}
+    details p{margin:0;padding:0 20px 20px;color:var(--gray)}
+
+    .social-section{
+      background:rgba(244,240,232,.82);
+      text-align:center;
+    }
+
+    .social-icons{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .social-link{
+      width:54px;
+      height:54px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--charcoal);
+      border-radius:50%;
+      background:var(--chalk);
+      color:var(--charcoal);
+      text-decoration:none;
+    }
+
+    .social-link svg{
+      width:24px;
+      height:24px;
+      fill:currentColor;
+    }
+
+    .contact{
+      background:rgba(41,39,34,.98);
+      color:var(--chalk);
+      text-align:center;
+    }
+
+    .contact .section-kicker,
+    .contact .section-lead{
+      color:rgba(244,240,232,.76);
+    }
+
+    footer{
+      padding:34px 18px;
+      background:var(--charcoal);
+      color:var(--chalk);
+      text-align:center;
+      font-size:.88rem;
+    }
+
+    footer a{
+      display:inline-block;
+      margin:4px 8px;
+    }
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(41,39,34,.94);
+    }
+
+    .lightbox.open{display:flex}
+
+    .lightbox img{
+      max-width:min(94vw,1200px);
+      max-height:88vh;
+      border-radius:18px;
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:46px;
+      height:46px;
+      border:0;
+      border-radius:50%;
+      background:var(--chalk);
+      font-size:1.5rem;
+      cursor:pointer;
+    }
+
+    @media(min-width:820px){
+      .background-logo img{
+        width:min(132vw,1900px);
+        max-height:95vh;
+      }
+      .site-header{padding:14px 6%}
+      .header-social-link{
+        width:38px;
+        height:38px;
+      }
+      .header-social-link svg{
+        width:19px;
+        height:19px;
+      }
+      .menu-panel{
+        top:76px;
+        left:auto;
+        right:6%;
+        width:370px;
+        border:1px solid rgba(41,39,34,.12);
+        border-radius:20px;
+        overflow:hidden;
+      }
+      .hero-content{padding-left:6%;padding-right:6%}
+      .hero-dots{left:6%;bottom:34px}
+      section{padding:90px 6%}
+      .button{width:auto;margin-right:8px}
+      .intro-grid{grid-template-columns:repeat(2,1fr)}
+      .product-grid{grid-template-columns:repeat(3,1fr)}
+      .featured-grid{grid-template-columns:repeat(3,1fr)}
+      .collection-grid{grid-template-columns:repeat(2,1fr)}
+      .steps-grid{grid-template-columns:repeat(4,1fr)}
+    }
+
+    @media(min-width:1180px){
+      .intro-grid{grid-template-columns:repeat(4,1fr)}
+    }
+
+    @media(max-width:600px){
+      .site-header{
+        min-height:68px;
+        gap:8px;
+        padding:10px 12px;
+      }
+
+      .brand{gap:0}
+      .brand-logo,
+      .brand-fallback{
+        width:42px;
+        height:42px;
+      }
+      .brand > span:last-child{display:none}
+
+      .header-actions{gap:6px}
+      .header-socials{gap:5px}
+      .header-social-link{
+        width:30px;
+        height:30px;
+      }
+      .header-social-link svg{
+        width:15px;
+        height:15px;
+      }
+      .menu-button{
+        width:42px;
+        height:42px;
+      }
+      .menu-icon,
+      .menu-icon::before,
+      .menu-icon::after{width:21px}
+
+      .menu-panel{
+        top:68px;
+        max-height:calc(100vh - 68px);
+      }
+
+      .background-logo img{
+        width:106vw;
+        max-height:72vh;
+        opacity:1;
+        filter:none;
+      }
+
+      .collection-summary{grid-template-columns:96px minmax(0,1fr) auto}
+      .collection-image{width:96px;height:112px}
+      .collection-summary::after{content:"+";margin-right:12px;font-size:1.15rem}
+      details.collection-card[open] .collection-summary::after{content:"–"}
+      .collection-summary-content strong{font-size:1.3rem}
+      .product-actions{display:grid}
+      .product-actions .button{width:100%}
+    }
+
+    @media(max-width:360px){
+      .site-header{padding-left:9px;padding-right:9px}
+      .header-actions{gap:5px}
+      .header-socials{gap:4px}
+      .header-social-link{
+        width:28px;
+        height:28px;
+      }
+      .header-social-link svg{
+        width:14px;
+        height:14px;
+      }
+      .menu-button{
+        width:40px;
+        height:40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="background-logo" aria-hidden="true">
+    <img src="logo-wasserzeichen.png" alt="">
+  </div>
+
+  <div class="page">
+
+    <header class="site-header">
+      <a class="brand" href="#start">
+        <img
+          class="brand-logo"
+          src="logo.png"
+          alt="BAT Ceramics Logo"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+        >
+        <span class="brand-fallback">BAT</span>
+
+        <span>
+          <span class="brand-name">Bat Ceramics</span>
+          <span class="brand-subtitle">Handmade pottery</span>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <div class="header-socials" aria-label="Social Media">
+          <a class="header-social-link" href="#" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm11 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+          </a>
+          <a class="header-social-link" href="#" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v2H6v4h3v7h4v-7h3.2l.8-4H13V9c0-.7.3-1 1-1Z"/></svg>
+          </a>
+          <a class="header-social-link" href="#" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.5 12 4.5 12 4.5s-7 0-8.9.6A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.6 8.9.6 8.9.6s7 0 8.9-.6a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.8 15.5v-7l6 3.5-6 3.5Z"/></svg>
+          </a>
+          <a class="header-social-link" href="#" aria-label="TikTok" title="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3c.3 2 1.6 3.7 3.5 4.5V11a8.6 8.6 0 0 1-3.5-1v6.2a5.8 5.8 0 1 1-5-5.7v3.6a2.3 2.3 0 1 0 1.5 2.1V3H15Z"/></svg>
+          </a>
+        </div>
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          type="button"
+          aria-label="Menü öffnen"
+          aria-expanded="false"
+        >
+          <span class="menu-icon"></span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="menu-panel" id="mainMenu">
+      <a href="#start">Startseite</a>
+      <a href="#ueber-uns">Über BAT Ceramics</a>
+      <a href="#aktuell">Aktuelle Stücke</a>
+      <a href="#kollektion">Kollektion</a>
+      <a href="#fragen">Häufige Fragen</a>
+      <a href="#social">Social Media</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
+
+    <main id="start">
+
+      <section class="hero">
+        <div class="hero-slides">
+          <div class="hero-slide hero-video-slide active">
+            <video id="heroVideo" autoplay muted playsinline preload="auto">
+              <source src="hero-video.mov" type="video/quicktime">
+              Dein Browser kann dieses Video nicht abspielen.
+            </video>
+          </div>
+          <div class="hero-slide hero-slide-1"></div>
+          <div class="hero-slide hero-slide-2"></div>
+          <div class="hero-slide hero-slide-3"></div>
+        </div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+          <p class="eyebrow">Handgemachte Keramik – Entstanden im Prozess</p>
+
+          <h1>Keramik, deren Weg du siehst.</h1>
+
+          <p>
+            Entdecke handgemachte Keramik und die Geschichten, die bei ihrer Entstehung entstehen.
+          </p>
+
+          <a class="button" href="#kollektion">Kollektion entdecken</a>
+          <a class="button secondary" href="#kontakt">Unverbindlich anfragen</a>
+        </div>
+
+        <div class="hero-dots">
+          <button class="hero-dot active" type="button" aria-label="Video"></button>
+          <button class="hero-dot" type="button" aria-label="Bild 1"></button>
+          <button class="hero-dot" type="button" aria-label="Bild 2"></button>
+          <button class="hero-dot" type="button" aria-label="Bild 3"></button>
+        </div>
+      </section>
+
+      <section id="ueber-uns">
+        <p class="section-kicker">Das ist BAT Ceramics</p>
+        <h2 class="section-title">Handgemachte Keramik-Unikate – dokumentiert von der ersten Idee bis zum fertigen Stück.</h2>
+        <p class="workshop-note">Nicht nur das Ergebnis. Die ganze Geschichte.</p>
+
+        <div class="about-accordion">
+          <details>
+            <summary>Über mich und meine Werkstatt</summary>
+            <div class="about-accordion-content">
+              <p>Hinter Bat Ceramics steht die Freude daran, aus einem Stück Ton etwas Eigenständiges entstehen zu lassen. In meiner Werkstatt entwickle ich Keramik-Unikate Schritt für Schritt – mit Zeit zum Ausprobieren, Lernen und Weiterentwickeln.</p>
+              <p>Dabei bleibt der Weg zum fertigen Stück sichtbar. Ideen, Versuche, Veränderungen und kleine Überraschungen gehören genauso dazu wie das Ergebnis am Ende. So kannst du nicht nur die fertige Keramik entdecken, sondern auch miterleben, wie sie entsteht.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Firmenphilosophie / Leitbild</summary>
+            <div class="about-accordion-content">
+              <p>Bei Bat Ceramics geht es nicht um industrielle Gleichförmigkeit, sondern um bewusstes Handwerk, Persönlichkeit und einen nachvollziehbaren Entstehungsprozess. Jedes Stück darf Spuren seiner Herstellung tragen und dadurch seinen eigenen Charakter bekommen.</p>
+              <p>Das fertige Unikat und seine Geschichte gehören für mich zusammen. Deshalb dokumentiere ich den Weg von der Idee über die Arbeit in der Werkstatt bis zum fertigen Stück. Wer sich für Bat Ceramics entscheidet, bekommt nicht einfach nur Keramik, sondern ein handgemachtes Stück, dessen Weg sichtbar bleibt.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Geschichte zum Logo</summary>
+            <div class="about-accordion-content">
+              <p>Das Logo von Bat Ceramics ist das wiedererkennbare Zeichen der Marke und begleitet die Stücke, die Werkstatt und den dokumentierten Entstehungsprozess. Es soll nicht für Perfektion stehen, sondern für Eigenständigkeit, Handarbeit und den persönlichen Charakter, der jedes Unikat ausmacht.</p>
+              <p>Wie bei der Keramik selbst steht deshalb nicht nur das fertige Zeichen im Mittelpunkt. Entscheidend ist, wofür es steht: für eine Marke, die ihren eigenen Weg geht, sich weiterentwickelt und die Geschichte hinter ihren Arbeiten sichtbar macht.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section id="aktuell">
+        <p class="section-kicker">Aktuelle Stücke</p>
+        <h2 class="section-title">Deine nächste Lieblingskeramik könnte hier stehen.</h2>
+        <p class="section-lead">Drei ausgewählte Stücke. Ein Klick auf das Bild führt dich direkt zum Video über die Entstehung des jeweiligen Unikats.</p>
+
+        <div class="featured-grid">
+          <article class="featured-card">
+            <a class="featured-media" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="Video zum Becher Bad Morning auf YouTube ansehen">
+              <img src="tasse.jpg" alt="Becher Bad Morning">
+              <span class="video-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>
+                Video ansehen
+              </span>
+            </a>
+            <div class="featured-content">
+              <span class="product-tag">Einzelstück · Tasse</span>
+              <h3>Becher „Bad Morning“</h3>
+              <p>Handgeformter Becher mit matter Glasur.</p>
+              <p class="price">32 €</p>
+              <p class="note">YouTube-Link im Code später durch das passende Produktvideo ersetzen.</p>
+              <a class="button secondary" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Becher%20Bad%20Morning&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20den%20Becher%20Bad%20Morning.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
+            </div>
+          </article>
+
+          <article class="featured-card">
+            <a class="featured-media" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="Video zur Schale Soft Chaos auf YouTube ansehen">
+              <img src="schale.jpg" alt="Schale Soft Chaos">
+              <span class="video-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>
+                Video ansehen
+              </span>
+            </a>
+            <div class="featured-content">
+              <span class="product-tag">Einzelstück · Schüssel</span>
+              <h3>Schale „Soft Chaos“</h3>
+              <p>Organische Schale für Snacks oder Schmuck.</p>
+              <p class="price">28 €</p>
+              <p class="note">YouTube-Link im Code später durch das passende Produktvideo ersetzen.</p>
+              <a class="button secondary" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Schale%20Soft%20Chaos&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20die%20Schale%20Soft%20Chaos.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
+            </div>
+          </article>
+
+          <article class="featured-card">
+            <a class="featured-media" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="Video zur Vase Odd Beauty auf YouTube ansehen">
+              <img src="vase.jpg" alt="Vase Odd Beauty">
+              <span class="video-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>
+                Video ansehen
+              </span>
+            </a>
+            <div class="featured-content">
+              <span class="product-tag">Einzelstück · Vase</span>
+              <h3>Vase „Odd Beauty“</h3>
+              <p>Kleine Vase mit warmer Glasur.</p>
+              <p class="price">Verkauft</p>
+              <p class="note">Auch verkaufte Stücke können mit ihrer Entstehungsgeschichte sichtbar bleiben.</p>
+            </div>
+          </article>
+
+          <!-- Die Gestaltung ist bereits für bis zu sechs aktuelle Stücke vorbereitet.
+               Weitere drei featured-card-Elemente können später direkt hier ergänzt werden. -->
+        </div>
+      </section>
+
+      <section class="collection-section" id="kollektion">
+        <p class="section-kicker">Kollektion</p>
+        <h2 class="section-title">Alle Stücke. Nach Form und Geschichte sortiert.</h2>
+        <p class="section-lead">Filtere nach Produktart oder nach einer zusammengehörigen Kollektion. Ein Klick auf ein Produkt öffnet weitere Informationen.</p>
+
+        <div class="collection-toolbar" aria-label="Kollektion filtern">
+          <div class="filter-block">
+            <span class="filter-label">Produktart</span>
+            <div class="filter-buttons" id="categoryFilters">
+              <button class="filter-button active" type="button" data-category="all" aria-pressed="true">Alle</button>
+              <button class="filter-button" type="button" data-category="tassen" aria-pressed="false">Tassen</button>
+              <button class="filter-button" type="button" data-category="teller" aria-pressed="false">Teller</button>
+              <button class="filter-button" type="button" data-category="schuesseln" aria-pressed="false">Schüsseln</button>
+              <button class="filter-button" type="button" data-category="kannen" aria-pressed="false">Kannen</button>
+              <button class="filter-button" type="button" data-category="vasen" aria-pressed="false">Vasen</button>
+              <button class="filter-button" type="button" data-category="sonstiges" aria-pressed="false">Sonstiges</button>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <span class="filter-label">Kollektion</span>
+            <div class="filter-buttons" id="seriesFilters">
+              <button class="filter-button active" type="button" data-series="all" aria-pressed="true">Alle</button>
+              <button class="filter-button" type="button" data-series="einzelstuecke" aria-pressed="false">Einzelstücke</button>
+              <button class="filter-button" type="button" data-series="eisregen" aria-pressed="false">Eisregen</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="collection-grid" id="collectionGrid">
+          <details class="collection-card" data-category="tassen" data-series="einzelstuecke">
+            <summary class="collection-summary">
+              <span class="collection-image"><img src="tasse.jpg" alt="Becher Bad Morning"></span>
+              <span class="collection-summary-content">
+                <span class="product-tag">Tasse · Einzelstück</span>
+                <strong>Becher „Bad Morning“</strong>
+                <span class="collection-price">32 €</span>
+              </span>
+            </summary>
+            <div class="collection-details">
+              <p><strong>Zum Stück:</strong> Handgeformter Becher mit matter Glasur. Kleine Unterschiede und Spuren der Handarbeit gehören bewusst zum Unikat.</p>
+              <p><strong>Status:</strong> verfügbar</p>
+              <div class="product-actions">
+                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
+                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Becher%20Bad%20Morning&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20den%20Becher%20Bad%20Morning.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="collection-card" data-category="schuesseln" data-series="einzelstuecke">
+            <summary class="collection-summary">
+              <span class="collection-image"><img src="schale.jpg" alt="Schale Soft Chaos"></span>
+              <span class="collection-summary-content">
+                <span class="product-tag">Schüssel · Einzelstück</span>
+                <strong>Schale „Soft Chaos“</strong>
+                <span class="collection-price">28 €</span>
+              </span>
+            </summary>
+            <div class="collection-details">
+              <p><strong>Zum Stück:</strong> Organische Schale für Snacks, kleine Dinge oder Schmuck. Die Form ist bewusst nicht industriell gleichmäßig.</p>
+              <p><strong>Status:</strong> verfügbar</p>
+              <div class="product-actions">
+                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
+                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Schale%20Soft%20Chaos&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20die%20Schale%20Soft%20Chaos.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="collection-card" data-category="vasen" data-series="einzelstuecke">
+            <summary class="collection-summary">
+              <span class="collection-image"><img src="vase.jpg" alt="Vase Odd Beauty"></span>
+              <span class="collection-summary-content">
+                <span class="product-tag">Vase · Einzelstück</span>
+                <strong>Vase „Odd Beauty“</strong>
+                <span class="collection-price">Verkauft</span>
+              </span>
+            </summary>
+            <div class="collection-details">
+              <p><strong>Zum Stück:</strong> Kleine Vase mit warmer Glasur. Das Produkt bleibt als Teil des Werkstattarchivs sichtbar.</p>
+              <p><strong>Status:</strong> verkauft</p>
+              <div class="product-actions">
+                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="collection-card demo-product" data-category="teller" data-series="eisregen">
+            <summary class="collection-summary">
+              <span class="collection-image"><img src="schale.jpg" alt="Beispiel Teller aus der Kollektion Eisregen"></span>
+              <span class="collection-summary-content">
+                <span class="product-tag">Teller · Eisregen</span>
+                <strong>Teller „Eisregen“</strong>
+                <span class="collection-price">Preis eintragen</span>
+              </span>
+            </summary>
+            <div class="collection-details">
+              <p><strong>Beispielprodukt:</strong> Dieser Eintrag zeigt, wie mehrere unterschiedliche Formen gemeinsam unter einer Kollektion wie „Eisregen“ geführt werden können.</p>
+              <p class="note">Bild, Preis, Beschreibung und YouTube-Link bitte durch die echten Produktdaten ersetzen.</p>
+              <div class="product-actions">
+                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
+                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Teller%20Eisregen">Verfügbarkeit anfragen</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="collection-card demo-product" data-category="tassen" data-series="eisregen">
+            <summary class="collection-summary">
+              <span class="collection-image"><img src="tasse.jpg" alt="Beispiel Tasse aus der Kollektion Eisregen"></span>
+              <span class="collection-summary-content">
+                <span class="product-tag">Tasse · Eisregen</span>
+                <strong>Tasse „Eisregen“</strong>
+                <span class="collection-price">Preis eintragen</span>
+              </span>
+            </summary>
+            <div class="collection-details">
+              <p><strong>Beispielprodukt:</strong> Eine zweite Form innerhalb derselben Kollektion. Über die Filter können Besucher entweder alle Tassen oder gezielt nur „Eisregen“ anzeigen.</p>
+              <p class="note">Bild, Preis, Beschreibung und YouTube-Link bitte durch die echten Produktdaten ersetzen.</p>
+              <div class="product-actions">
+                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
+                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Tasse%20Eisregen">Verfügbarkeit anfragen</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="collection-card demo-product" data-category="kannen" data-series="eisregen">
+            <summary class="collection-summary">
+              <span class="collection-image"><img src="vase.jpg" alt="Beispiel Kanne aus der Kollektion Eisregen"></span>
+              <span class="collection-summary-content">
+                <span class="product-tag">Kanne · Eisregen</span>
+                <strong>Kanne „Eisregen“</strong>
+                <span class="collection-price">Preis eintragen</span>
+              </span>
+            </summary>
+            <div class="collection-details">
+              <p><strong>Beispielprodukt:</strong> So kann eine Kanne zusammen mit Teller und Tasse in derselben Kollektion erscheinen, ohne ihre eigene Produktart zu verlieren.</p>
+              <p class="note">Bild, Preis, Beschreibung und YouTube-Link bitte durch die echten Produktdaten ersetzen.</p>
+              <div class="product-actions">
+                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
+                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Kanne%20Eisregen">Verfügbarkeit anfragen</a>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <p class="collection-empty" id="collectionEmpty" hidden>Für diese Filterkombination sind aktuell keine Stücke eingetragen.</p>
+        <p class="purchase-note"><strong>Kauf ohne Shop-Backend:</strong> „Verfügbarkeit anfragen“ öffnet nur dein E-Mail-Programm. Es werden auf dieser Website keine Zahlungs- oder Kundendaten gespeichert und durch den Klick noch keine Bestellung ausgelöst.</p>
+      </section>
+
+      <section id="fragen">
+        <p class="section-kicker">Gut zu wissen</p>
+        <h2 class="section-title">Häufige Fragen</h2>
+
+        <div class="faq">
+          <details>
+            <summary>Ist jedes Stück handgemacht?</summary>
+            <p>Ja. Kleine Unterschiede, Werkzeugspuren und Veränderungen im Prozess gehören zur Handarbeit und machen jedes Stück eigenständig.</p>
+          </details>
+
+          <details>
+            <summary>Wie kommt mein Unikat zu mir?</summary>
+            <p>Du entdeckst ein Stück, fragst seine Verfügbarkeit unverbindlich per E-Mail an und erhältst anschließend die konkreten Informationen zu Preis, Versand und Zahlung. Erst danach wird der Kauf persönlich abgestimmt.</p>
+          </details>
+
+          <details>
+            <summary>Warum gibt es keinen direkten Warenkorb?</summary>
+            <p>Bat Ceramics setzt zunächst auf eine persönliche Anfrage statt auf ein eigenes Shop-Backend. Dadurch müssen auf der Website selbst keine Zahlungsdaten verarbeitet oder Kundendaten in einer Shop-Datenbank gespeichert werden.</p>
+          </details>
+
+          <details>
+            <summary>Wie kann ich bezahlen?</summary>
+            <p>Nach bestätigter Verfügbarkeit können Zahlung und Versand persönlich abgestimmt werden, zum Beispiel per PayPal-Zahlungsanforderung oder Überweisung.</p>
+          </details>
+
+          <details>
+            <summary>Was muss ich vor dem Kauf noch wissen?</summary>
+            <p>Vor einem verbindlichen Kauf müssen die für das konkrete Stück geltenden Angaben zu Gesamtpreis, gegebenenfalls Versandkosten, Lieferbedingungen und den gesetzlichen Verbraucherinformationen bereitgestellt werden. Diese Texte sollten vor dem echten Verkaufsstart rechtlich geprüft und vollständig ergänzt werden.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="social-section" id="social">
+        <p class="section-kicker">Folge BAT Ceramics</p>
+        <h2 class="section-title">Social Media</h2>
+        <p class="section-lead">Die Links kannst du später eintragen.</p>
+
+        <div class="social-icons">
+          <a class="social-link" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm11 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+          </a>
+
+          <a class="social-link" href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v2H6v4h3v7h4v-7h3.2l.8-4H13V9c0-.7.3-1 1-1Z"/></svg>
+          </a>
+
+          <a class="social-link" href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.5 12 4.5 12 4.5s-7 0-8.9.6A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.6 8.9.6 8.9.6s7 0 8.9-.6a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.8 15.5v-7l6 3.5-6 3.5Z"/></svg>
+          </a>
+
+          <a class="social-link" href="#" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M15 3c.3 2 1.6 3.7 3.5 4.5V11a8.6 8.6 0 0 1-3.5-1v6.2a5.8 5.8 0 1 1-5-5.7v3.6a2.3 2.3 0 1 0 1.5 2.1V3H15Z"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <section class="contact" id="kontakt">
+        <p class="section-kicker">Sag Hallo</p>
+        <h2 class="section-title">Du hast dein Lieblingsstück gefunden?</h2>
+        <p class="section-lead">Schreib eine kurze unverbindliche E-Mail.</p>
+        <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE">BAT Ceramics kontaktieren</a>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>© 2026 BAT Ceramics · DEIN NAME</p>
+      <p>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" type="button">×</button>
+    <img id="lightboxImage" alt="">
+  </div>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const mainMenu = document.getElementById("mainMenu");
+
+    function closeMenu(){
+      menuButton.setAttribute("aria-expanded","false");
+      mainMenu.classList.remove("open");
+      document.body.classList.remove("menu-open");
+    }
+
+    menuButton.addEventListener("click",()=>{
+      const open = menuButton.getAttribute("aria-expanded")==="true";
+      menuButton.setAttribute("aria-expanded",String(!open));
+      mainMenu.classList.toggle("open",!open);
+      document.body.classList.toggle("menu-open",!open);
+    });
+
+    mainMenu.querySelectorAll("a").forEach(link=>{
+      link.addEventListener("click",closeMenu);
+    });
+
+    const slides=[...document.querySelectorAll(".hero-slide")];
+    const dots=[...document.querySelectorAll(".hero-dot")];
+    const heroVideo=document.getElementById("heroVideo");
+    let current=0;
+    let heroTimer=null;
+
+    function clearHeroTimer(){
+      if(heroTimer){
+        clearTimeout(heroTimer);
+        heroTimer=null;
+      }
+    }
+
+    function scheduleNextImage(){
+      clearHeroTimer();
+      heroTimer=setTimeout(()=>{
+        showSlide((current+1)%slides.length);
+      },5000);
+    }
+
+    function showSlide(index){
+      clearHeroTimer();
+      current=index;
+      slides.forEach((slide,i)=>slide.classList.toggle("active",i===index));
+      dots.forEach((dot,i)=>dot.classList.toggle("active",i===index));
+
+      if(index===0 && heroVideo){
+        heroVideo.currentTime=0;
+        const playPromise=heroVideo.play();
+        if(playPromise && typeof playPromise.catch==="function"){
+          playPromise.catch(()=>{
+            scheduleNextImage();
+          });
+        }
+      }else{
+        if(heroVideo){
+          heroVideo.pause();
+        }
+        scheduleNextImage();
+      }
+    }
+
+    if(heroVideo){
+      heroVideo.addEventListener("ended",()=>showSlide(1));
+      heroVideo.addEventListener("error",()=>showSlide(1));
+    }else{
+      scheduleNextImage();
+    }
+
+    dots.forEach((dot,index)=>{
+      dot.addEventListener("click",()=>showSlide(index));
+    });
+
+    const categoryButtons=[...document.querySelectorAll("[data-category].filter-button")];
+    const seriesButtons=[...document.querySelectorAll("[data-series].filter-button")];
+    const collectionCards=[...document.querySelectorAll(".collection-card")];
+    const collectionEmpty=document.getElementById("collectionEmpty");
+    let activeCategory="all";
+    let activeSeries="all";
+
+    function updateCollectionFilters(){
+      let visibleCount=0;
+
+      collectionCards.forEach(card=>{
+        const matchesCategory=activeCategory==="all" || card.dataset.category===activeCategory;
+        const matchesSeries=activeSeries==="all" || card.dataset.series===activeSeries;
+        const visible=matchesCategory && matchesSeries;
+        card.hidden=!visible;
+        if(!visible) card.open=false;
+        if(visible) visibleCount++;
+      });
+
+      if(collectionEmpty){
+        collectionEmpty.hidden=visibleCount!==0;
+      }
+    }
+
+    function setActiveFilter(buttons,activeButton){
+      buttons.forEach(button=>{
+        const active=button===activeButton;
+        button.classList.toggle("active",active);
+        button.setAttribute("aria-pressed",String(active));
+      });
+    }
+
+    categoryButtons.forEach(button=>{
+      button.addEventListener("click",()=>{
+        activeCategory=button.dataset.category;
+        setActiveFilter(categoryButtons,button);
+        updateCollectionFilters();
+      });
+    });
+
+    seriesButtons.forEach(button=>{
+      button.addEventListener("click",()=>{
+        activeSeries=button.dataset.series;
+        setActiveFilter(seriesButtons,button);
+        updateCollectionFilters();
+      });
+    });
+
+    updateCollectionFilters();
+
+    const lightbox=document.getElementById("lightbox");
+    const lightboxImage=document.getElementById("lightboxImage");
+
+    document.querySelectorAll(".lightboxable img").forEach(img=>{
+      img.addEventListener("click",()=>{
+        lightboxImage.src=img.src;
+        lightboxImage.alt=img.alt;
+        lightbox.classList.add("open");
+        document.body.classList.add("lightbox-open");
+      });
+    });
+
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      document.body.classList.remove("lightbox-open");
+    }
+
+    document.getElementById("lightboxClose").addEventListener("click",closeLightbox);
+    lightbox.addEventListener("click",e=>{
+      if(e.target===lightbox)closeLightbox();
+    });
+
+    document.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){
+        closeMenu();
+        closeLightbox();
+      }
+    });
+  </script>
+
+</body>
+</html>
