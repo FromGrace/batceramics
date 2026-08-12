@@ -5,53 +5,50 @@ media:
 content:
   - name: products
     label: Produkte
-    type: collection
-    path: content/products
-    filename: "{primary}.md"
-
-    view:
-      primary: name
-      fields:
-        - name
-        - status
-        - price
-
+    type: file
+    path: content/products.json
+    format: json
     fields:
-      - name: name
-        label: Produktname
-        type: string
-        required: true
-
-      - name: status
-        label: Status
-        type: select
-        options:
-          values:
-            - Verfügbar
-            - Verkauft
-            - Reserviert
-
-      - name: price
-        label: Preis
-        type: string
-
-      - name: description
-        label: Beschreibung
-        type: text
-
-      - name: image
-        label: Produktbild
-        type: image
-
-      - name: videos
-        label: Videos
+      - name: products
+        label: Produkte
         type: object
         list: true
         fields:
-          - name: title
-            label: Titel des Videos
+          - name: name
+            label: Produktname
+            type: string
+            required: true
+
+          - name: status
+            label: Status
+            type: select
+            options:
+              values:
+                - Verfügbar
+                - Verkauft
+                - Reserviert
+
+          - name: price
+            label: Preis
             type: string
 
-          - name: youtube
-            label: YouTube-Link
-            type: string
+          - name: description
+            label: Beschreibung
+            type: text
+
+          - name: image
+            label: Produktbild
+            type: image
+
+          - name: videos
+            label: Videos
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Titel des Videos
+                type: string
+
+              - name: youtube
+                label: YouTube-Link
+                type: string
