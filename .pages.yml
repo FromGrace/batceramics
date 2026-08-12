@@ -1,0 +1,50 @@
+media:
+  input: media
+  output: /media
+
+content:
+  - name: products
+    label: Produkte
+    type: collection
+    path: content/products
+    filename: "{primary}.json"
+    view:
+      fields: [name, status, price]
+    fields:
+      - name: name
+        label: Produktname
+        type: string
+        required: true
+
+      - name: status
+        label: Status
+        type: select
+        options:
+          values:
+            - Verfügbar
+            - Verkauft
+            - Reserviert
+
+      - name: price
+        label: Preis
+        type: string
+
+      - name: description
+        label: Beschreibung
+        type: text
+
+      - name: image
+        label: Produktbild
+        type: image
+
+      - name: videos
+        label: Videos
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Titel des Videos
+            type: string
+          - name: youtube
+            label: YouTube-Link
+            type: string
