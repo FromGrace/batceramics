@@ -1,3 +1,17 @@
 {
-  "products": []
+  "products": [
+    {
+      "name": "Test",
+      "status": "Verfügbar",
+      "price": "2",
+      "description": "TEst",
+      "image": "/media/WhatsApp Image 2026-08-01 at 12.57.43.jpeg",
+      "videos": [
+        {
+          "title": "Tasse",
+          "youtube": "https://www.youtube.com/watch?v=p6wkSd3h1QQ"
+        }
+      ]
+    }
+  ]
 }
