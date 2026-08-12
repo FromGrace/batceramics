@@ -868,6 +868,42 @@
 
     .purchase-note strong{color:var(--charcoal)}
 
+    .video-list{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .video-consent{
+      padding:16px;
+      border:1px solid rgba(180,119,85,.22);
+      border-radius:18px;
+      background:rgba(216,205,189,.38);
+    }
+
+    .video-consent strong{
+      display:block;
+      margin-bottom:6px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.3rem;
+    }
+
+    .video-consent p{
+      margin:0 0 10px;
+      color:var(--gray);
+      font-size:.88rem;
+    }
+
+    .video-consent .button{margin:0}
+
+    .video-frame{
+      width:100%;
+      aspect-ratio:16/9;
+      border:0;
+      border-radius:14px;
+      background:var(--charcoal);
+    }
+
     .process{
       background:rgba(216,205,189,.58);
     }
@@ -1235,62 +1271,8 @@
         <h2 class="section-title">Deine nächste Lieblingskeramik könnte hier stehen.</h2>
         <p class="section-lead">Drei ausgewählte Stücke. Ein Klick auf das Bild führt dich direkt zum Video über die Entstehung des jeweiligen Unikats.</p>
 
-        <div class="featured-grid">
-          <article class="featured-card">
-            <a class="featured-media" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="Video zum Becher Bad Morning auf YouTube ansehen">
-              <img src="tasse.jpg" alt="Becher Bad Morning">
-              <span class="video-badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>
-                Video ansehen
-              </span>
-            </a>
-            <div class="featured-content">
-              <span class="product-tag">Einzelstück · Tasse</span>
-              <h3>Becher „Bad Morning“</h3>
-              <p>Handgeformter Becher mit matter Glasur.</p>
-              <p class="price">32 €</p>
-              <p class="note">YouTube-Link im Code später durch das passende Produktvideo ersetzen.</p>
-              <a class="button secondary" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Becher%20Bad%20Morning&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20den%20Becher%20Bad%20Morning.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
-            </div>
-          </article>
-
-          <article class="featured-card">
-            <a class="featured-media" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="Video zur Schale Soft Chaos auf YouTube ansehen">
-              <img src="schale.jpg" alt="Schale Soft Chaos">
-              <span class="video-badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>
-                Video ansehen
-              </span>
-            </a>
-            <div class="featured-content">
-              <span class="product-tag">Einzelstück · Schüssel</span>
-              <h3>Schale „Soft Chaos“</h3>
-              <p>Organische Schale für Snacks oder Schmuck.</p>
-              <p class="price">28 €</p>
-              <p class="note">YouTube-Link im Code später durch das passende Produktvideo ersetzen.</p>
-              <a class="button secondary" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Schale%20Soft%20Chaos&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20die%20Schale%20Soft%20Chaos.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
-            </div>
-          </article>
-
-          <article class="featured-card">
-            <a class="featured-media" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="Video zur Vase Odd Beauty auf YouTube ansehen">
-              <img src="vase.jpg" alt="Vase Odd Beauty">
-              <span class="video-badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>
-                Video ansehen
-              </span>
-            </a>
-            <div class="featured-content">
-              <span class="product-tag">Einzelstück · Vase</span>
-              <h3>Vase „Odd Beauty“</h3>
-              <p>Kleine Vase mit warmer Glasur.</p>
-              <p class="price">Verkauft</p>
-              <p class="note">Auch verkaufte Stücke können mit ihrer Entstehungsgeschichte sichtbar bleiben.</p>
-            </div>
-          </article>
-
-          <!-- Die Gestaltung ist bereits für bis zu sechs aktuelle Stücke vorbereitet.
-               Weitere drei featured-card-Elemente können später direkt hier ergänzt werden. -->
+        <div class="featured-grid" id="featuredGrid">
+          <p class="collection-empty">Produkte werden geladen …</p>
         </div>
       </section>
 
@@ -1324,118 +1306,7 @@
         </div>
 
         <div class="collection-grid" id="collectionGrid">
-          <details class="collection-card" data-category="tassen" data-series="einzelstuecke">
-            <summary class="collection-summary">
-              <span class="collection-image"><img src="tasse.jpg" alt="Becher Bad Morning"></span>
-              <span class="collection-summary-content">
-                <span class="product-tag">Tasse · Einzelstück</span>
-                <strong>Becher „Bad Morning“</strong>
-                <span class="collection-price">32 €</span>
-              </span>
-            </summary>
-            <div class="collection-details">
-              <p><strong>Zum Stück:</strong> Handgeformter Becher mit matter Glasur. Kleine Unterschiede und Spuren der Handarbeit gehören bewusst zum Unikat.</p>
-              <p><strong>Status:</strong> verfügbar</p>
-              <div class="product-actions">
-                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
-                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Becher%20Bad%20Morning&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20den%20Becher%20Bad%20Morning.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
-              </div>
-            </div>
-          </details>
-
-          <details class="collection-card" data-category="schuesseln" data-series="einzelstuecke">
-            <summary class="collection-summary">
-              <span class="collection-image"><img src="schale.jpg" alt="Schale Soft Chaos"></span>
-              <span class="collection-summary-content">
-                <span class="product-tag">Schüssel · Einzelstück</span>
-                <strong>Schale „Soft Chaos“</strong>
-                <span class="collection-price">28 €</span>
-              </span>
-            </summary>
-            <div class="collection-details">
-              <p><strong>Zum Stück:</strong> Organische Schale für Snacks, kleine Dinge oder Schmuck. Die Form ist bewusst nicht industriell gleichmäßig.</p>
-              <p><strong>Status:</strong> verfügbar</p>
-              <div class="product-actions">
-                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
-                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Schale%20Soft%20Chaos&body=Hallo%20Bat%20Ceramics%2C%0A%0Aich%20interessiere%20mich%20fuer%20die%20Schale%20Soft%20Chaos.%20Ist%20das%20Stueck%20noch%20verfuegbar%3F%0A%0AViele%20Gruesse">Verfügbarkeit anfragen</a>
-              </div>
-            </div>
-          </details>
-
-          <details class="collection-card" data-category="vasen" data-series="einzelstuecke">
-            <summary class="collection-summary">
-              <span class="collection-image"><img src="vase.jpg" alt="Vase Odd Beauty"></span>
-              <span class="collection-summary-content">
-                <span class="product-tag">Vase · Einzelstück</span>
-                <strong>Vase „Odd Beauty“</strong>
-                <span class="collection-price">Verkauft</span>
-              </span>
-            </summary>
-            <div class="collection-details">
-              <p><strong>Zum Stück:</strong> Kleine Vase mit warmer Glasur. Das Produkt bleibt als Teil des Werkstattarchivs sichtbar.</p>
-              <p><strong>Status:</strong> verkauft</p>
-              <div class="product-actions">
-                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
-              </div>
-            </div>
-          </details>
-
-          <details class="collection-card demo-product" data-category="teller" data-series="eisregen">
-            <summary class="collection-summary">
-              <span class="collection-image"><img src="schale.jpg" alt="Beispiel Teller aus der Kollektion Eisregen"></span>
-              <span class="collection-summary-content">
-                <span class="product-tag">Teller · Eisregen</span>
-                <strong>Teller „Eisregen“</strong>
-                <span class="collection-price">Preis eintragen</span>
-              </span>
-            </summary>
-            <div class="collection-details">
-              <p><strong>Beispielprodukt:</strong> Dieser Eintrag zeigt, wie mehrere unterschiedliche Formen gemeinsam unter einer Kollektion wie „Eisregen“ geführt werden können.</p>
-              <p class="note">Bild, Preis, Beschreibung und YouTube-Link bitte durch die echten Produktdaten ersetzen.</p>
-              <div class="product-actions">
-                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
-                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Teller%20Eisregen">Verfügbarkeit anfragen</a>
-              </div>
-            </div>
-          </details>
-
-          <details class="collection-card demo-product" data-category="tassen" data-series="eisregen">
-            <summary class="collection-summary">
-              <span class="collection-image"><img src="tasse.jpg" alt="Beispiel Tasse aus der Kollektion Eisregen"></span>
-              <span class="collection-summary-content">
-                <span class="product-tag">Tasse · Eisregen</span>
-                <strong>Tasse „Eisregen“</strong>
-                <span class="collection-price">Preis eintragen</span>
-              </span>
-            </summary>
-            <div class="collection-details">
-              <p><strong>Beispielprodukt:</strong> Eine zweite Form innerhalb derselben Kollektion. Über die Filter können Besucher entweder alle Tassen oder gezielt nur „Eisregen“ anzeigen.</p>
-              <p class="note">Bild, Preis, Beschreibung und YouTube-Link bitte durch die echten Produktdaten ersetzen.</p>
-              <div class="product-actions">
-                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
-                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Tasse%20Eisregen">Verfügbarkeit anfragen</a>
-              </div>
-            </div>
-          </details>
-
-          <details class="collection-card demo-product" data-category="kannen" data-series="eisregen">
-            <summary class="collection-summary">
-              <span class="collection-image"><img src="vase.jpg" alt="Beispiel Kanne aus der Kollektion Eisregen"></span>
-              <span class="collection-summary-content">
-                <span class="product-tag">Kanne · Eisregen</span>
-                <strong>Kanne „Eisregen“</strong>
-                <span class="collection-price">Preis eintragen</span>
-              </span>
-            </summary>
-            <div class="collection-details">
-              <p><strong>Beispielprodukt:</strong> So kann eine Kanne zusammen mit Teller und Tasse in derselben Kollektion erscheinen, ohne ihre eigene Produktart zu verlieren.</p>
-              <p class="note">Bild, Preis, Beschreibung und YouTube-Link bitte durch die echten Produktdaten ersetzen.</p>
-              <div class="product-actions">
-                <a class="button secondary" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Entstehung auf YouTube ansehen</a>
-                <a class="button" href="mailto:DEINE-EMAIL@BEISPIEL.DE?subject=Verfuegbarkeit%20Kanne%20Eisregen">Verfügbarkeit anfragen</a>
-              </div>
-            </div>
-          </details>
+          <p class="collection-empty">Produkte werden geladen …</p>
         </div>
 
         <p class="collection-empty" id="collectionEmpty" hidden>Für diese Filterkombination sind aktuell keine Stücke eingetragen.</p>
@@ -1596,16 +1467,134 @@
       dot.addEventListener("click",()=>showSlide(index));
     });
 
+    const featuredGrid=document.getElementById("featuredGrid");
+    const collectionGrid=document.getElementById("collectionGrid");
+    const collectionEmpty=document.getElementById("collectionEmpty");
     const categoryButtons=[...document.querySelectorAll("[data-category].filter-button")];
     const seriesButtons=[...document.querySelectorAll("[data-series].filter-button")];
-    const collectionCards=[...document.querySelectorAll(".collection-card")];
-    const collectionEmpty=document.getElementById("collectionEmpty");
+    let collectionCards=[];
     let activeCategory="all";
     let activeSeries="all";
 
+    function escapeHtml(value=""){
+      return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function youtubeId(url=""){
+      try{
+        const parsed=new URL(url);
+        if(parsed.hostname.includes("youtu.be")) return parsed.pathname.split("/").filter(Boolean)[0]||"";
+        if(parsed.hostname.includes("youtube.com")){
+          if(parsed.pathname.startsWith("/shorts/")) return parsed.pathname.split("/")[2]||"";
+          if(parsed.pathname.startsWith("/embed/")) return parsed.pathname.split("/")[2]||"";
+          return parsed.searchParams.get("v")||"";
+        }
+      }catch(error){}
+      return "";
+    }
+
+    function normalizeCategory(value=""){
+      const v=String(value).toLowerCase();
+      if(v.includes("tasse")||v.includes("becher")) return "tassen";
+      if(v.includes("teller")) return "teller";
+      if(v.includes("schüssel")||v.includes("schuessel")||v.includes("schale")) return "schuesseln";
+      if(v.includes("kanne")) return "kannen";
+      if(v.includes("vase")) return "vasen";
+      return "sonstiges";
+    }
+
+    function categoryLabel(category){
+      return ({tassen:"Tasse",teller:"Teller",schuesseln:"Schüssel",kannen:"Kanne",vasen:"Vase",sonstiges:"Unikat"})[category]||"Unikat";
+    }
+
+    function seriesLabel(series){
+      return series==="eisregen" ? "Eisregen" : "Einzelstück";
+    }
+
+    function videoConsentHtml(video){
+      const id=youtubeId(video.youtube||"");
+      if(!id) return "";
+      const title=escapeHtml(video.title||"Entstehungsvideo");
+      return `<div class="video-consent" data-youtube-id="${escapeHtml(id)}">
+        <strong>${title}</strong>
+        <p>Das Video kommt von YouTube. Erst nach deinem Klick wird eine Verbindung zu YouTube hergestellt.</p>
+        <button class="button secondary load-youtube" type="button">YouTube-Video laden</button>
+      </div>`;
+    }
+
+    function inquiryHref(product){
+      const subject=`Verfügbarkeit ${product.name||"Keramik"}`;
+      const body=`Hallo Bat Ceramics,\n\nich interessiere mich für ${product.name||"dieses Stück"}. Ist das Stück noch verfügbar?\n\nViele Grüße`;
+      return `mailto:DEINE-EMAIL@BEISPIEL.DE?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function productMeta(product){
+      const category=normalizeCategory(product.category||product.type||product.name||"");
+      const series=String(product.series||"").toLowerCase().includes("eisregen") ? "eisregen" : "einzelstuecke";
+      return {category,series};
+    }
+
+    function renderProducts(products){
+      if(!Array.isArray(products) || products.length===0){
+        featuredGrid.innerHTML='<p class="collection-empty">Aktuell sind noch keine Stücke eingetragen.</p>';
+        collectionGrid.innerHTML="";
+        collectionEmpty.hidden=false;
+        return;
+      }
+
+      const featured=products.slice(0,3);
+      featuredGrid.innerHTML=featured.map(product=>{
+        const {category,series}=productMeta(product);
+        const videos=Array.isArray(product.videos)?product.videos:[];
+        return `<article class="featured-card">
+          <div class="featured-media lightboxable">
+            ${product.image?`<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}
+            ${videos.length?'<span class="video-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>Video vorhanden</span>':""}
+          </div>
+          <div class="featured-content">
+            <span class="product-tag">${escapeHtml(seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
+            <h3>${escapeHtml(product.name||"Keramik-Unikat")}</h3>
+            <p>${escapeHtml(product.description||"")}</p>
+            <p class="price">${escapeHtml(product.status==="Verkauft"?"Verkauft":product.price||"")}</p>
+            ${videos.length?`<div class="video-list">${videos.map(videoConsentHtml).join("")}</div>`:""}
+            ${product.status!=="Verkauft"?`<a class="button secondary" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a>`:""}
+          </div>
+        </article>`;
+      }).join("");
+
+      collectionGrid.innerHTML=products.map(product=>{
+        const {category,series}=productMeta(product);
+        const videos=Array.isArray(product.videos)?product.videos:[];
+        return `<details class="collection-card" data-category="${category}" data-series="${series}">
+          <summary class="collection-summary">
+            <span class="collection-image lightboxable">${product.image?`<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}</span>
+            <span class="collection-summary-content">
+              <span class="product-tag">${escapeHtml(categoryLabel(category))} · ${escapeHtml(seriesLabel(series))}</span>
+              <strong>${escapeHtml(product.name||"Keramik-Unikat")}</strong>
+              <span class="collection-price">${escapeHtml(product.status==="Verkauft"?"Verkauft":product.price||"")}</span>
+            </span>
+          </summary>
+          <div class="collection-details">
+            <p><strong>Zum Stück:</strong> ${escapeHtml(product.description||"")}</p>
+            <p><strong>Status:</strong> ${escapeHtml(product.status||"Verfügbar")}</p>
+            ${videos.length?`<div class="video-list">${videos.map(videoConsentHtml).join("")}</div>`:""}
+            ${product.status!=="Verkauft"?`<div class="product-actions"><a class="button" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a></div>`:""}
+          </div>
+        </details>`;
+      }).join("");
+
+      collectionCards=[...document.querySelectorAll(".collection-card")];
+      bindDynamicInteractions();
+      updateCollectionFilters();
+    }
+
     function updateCollectionFilters(){
       let visibleCount=0;
-
       collectionCards.forEach(card=>{
         const matchesCategory=activeCategory==="all" || card.dataset.category===activeCategory;
         const matchesSeries=activeSeries==="all" || card.dataset.series===activeSeries;
@@ -1614,10 +1603,7 @@
         if(!visible) card.open=false;
         if(visible) visibleCount++;
       });
-
-      if(collectionEmpty){
-        collectionEmpty.hidden=visibleCount!==0;
-      }
+      collectionEmpty.hidden=visibleCount!==0;
     }
 
     function setActiveFilter(buttons,activeButton){
@@ -1628,35 +1614,59 @@
       });
     }
 
-    categoryButtons.forEach(button=>{
-      button.addEventListener("click",()=>{
-        activeCategory=button.dataset.category;
-        setActiveFilter(categoryButtons,button);
-        updateCollectionFilters();
-      });
-    });
+    categoryButtons.forEach(button=>button.addEventListener("click",()=>{
+      activeCategory=button.dataset.category;
+      setActiveFilter(categoryButtons,button);
+      updateCollectionFilters();
+    }));
 
-    seriesButtons.forEach(button=>{
-      button.addEventListener("click",()=>{
-        activeSeries=button.dataset.series;
-        setActiveFilter(seriesButtons,button);
-        updateCollectionFilters();
-      });
-    });
+    seriesButtons.forEach(button=>button.addEventListener("click",()=>{
+      activeSeries=button.dataset.series;
+      setActiveFilter(seriesButtons,button);
+      updateCollectionFilters();
+    }));
 
-    updateCollectionFilters();
+    function bindDynamicInteractions(){
+      document.querySelectorAll(".load-youtube").forEach(button=>{
+        button.addEventListener("click",()=>{
+          const box=button.closest(".video-consent");
+          const id=box?.dataset.youtubeId;
+          if(!id) return;
+          const iframe=document.createElement("iframe");
+          iframe.className="video-frame";
+          iframe.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1`;
+          iframe.title="YouTube-Video";
+          iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.allowFullscreen=true;
+          box.replaceWith(iframe);
+        },{once:true});
+      });
+
+      document.querySelectorAll(".lightboxable img").forEach(img=>{
+        img.addEventListener("click",()=>{
+          lightboxImage.src=img.src;
+          lightboxImage.alt=img.alt;
+          lightbox.classList.add("open");
+          document.body.classList.add("lightbox-open");
+        });
+      });
+    }
+
+    fetch("content/products.json",{cache:"no-store"})
+      .then(response=>{
+        if(!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(data=>renderProducts(data.products||[]))
+      .catch(error=>{
+        console.error("Produkte konnten nicht geladen werden:",error);
+        featuredGrid.innerHTML='<p class="collection-empty">Produkte konnten nicht geladen werden.</p>';
+        collectionGrid.innerHTML="";
+        collectionEmpty.hidden=false;
+      });
 
     const lightbox=document.getElementById("lightbox");
     const lightboxImage=document.getElementById("lightboxImage");
-
-    document.querySelectorAll(".lightboxable img").forEach(img=>{
-      img.addEventListener("click",()=>{
-        lightboxImage.src=img.src;
-        lightboxImage.alt=img.alt;
-        lightbox.classList.add("open");
-        document.body.classList.add("lightbox-open");
-      });
-    });
 
     function closeLightbox(){
       lightbox.classList.remove("open");
