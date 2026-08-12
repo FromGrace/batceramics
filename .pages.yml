@@ -7,13 +7,15 @@ content:
     label: Produkte
     type: collection
     path: content/products
-    filename: "{primary}.json"
-    format: json
+    filename: "{primary}.md"
+
     view:
+      primary: name
       fields:
         - name
         - status
         - price
+
     fields:
       - name: name
         label: Produktname
