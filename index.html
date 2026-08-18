@@ -36,7 +36,8 @@
       line-height:1.6;
     }
     body.menu-open,
-    body.lightbox-open{overflow:hidden}
+    body.lightbox-open,
+    body.product-modal-open{overflow:hidden}
     a{color:inherit}
     img{display:block;max-width:100%}
     button{font:inherit}
@@ -1020,6 +1021,239 @@
       cursor:pointer;
     }
 
+
+    /* Große Produktansicht – Schritt 5 */
+    article.collection-card{
+      margin:0;
+      overflow:hidden;
+      border:1px solid var(--taupe);
+      border-radius:26px;
+      background:rgba(244,240,232,.97);
+      box-shadow:var(--shadow);
+    }
+
+    article.collection-card[hidden]{display:none}
+
+    .collection-card-button{
+      width:100%;
+      border:0;
+      background:transparent;
+      color:inherit;
+      text-align:left;
+      cursor:pointer;
+    }
+
+    .collection-card-button::after{
+      content:"Ansehen";
+      align-self:center;
+      margin-right:18px;
+      color:var(--clay);
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+
+    .collection-card-button:focus-visible{
+      outline:3px solid rgba(180,119,85,.45);
+      outline-offset:-3px;
+    }
+
+    .product-modal{
+      position:fixed;
+      inset:0;
+      z-index:2200;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+      background:rgba(41,39,34,.82);
+      backdrop-filter:blur(8px);
+    }
+
+    .product-modal.open{display:flex}
+
+    .product-modal-dialog{
+      position:relative;
+      width:min(1180px,100%);
+      max-height:calc(100svh - 28px);
+      overflow:auto;
+      border:1px solid rgba(216,205,189,.65);
+      border-radius:30px;
+      background:var(--chalk);
+      box-shadow:0 30px 80px rgba(0,0,0,.28);
+    }
+
+    .product-modal-close{
+      position:sticky;
+      top:14px;
+      z-index:4;
+      float:right;
+      width:46px;
+      height:46px;
+      margin:14px 14px -60px 0;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(41,39,34,.15);
+      border-radius:50%;
+      background:rgba(244,240,232,.96);
+      color:var(--charcoal);
+      font-size:1.65rem;
+      line-height:1;
+      cursor:pointer;
+      box-shadow:0 8px 22px rgba(41,39,34,.12);
+    }
+
+    .product-modal-close:hover,
+    .product-modal-close:focus-visible{
+      background:var(--clay);
+      color:var(--chalk);
+      outline:none;
+    }
+
+    .product-modal-layout{
+      display:grid;
+      min-height:100%;
+    }
+
+    .product-modal-gallery{
+      padding:18px;
+      background:rgba(216,205,189,.35);
+    }
+
+    .product-modal-main{
+      aspect-ratio:4/3;
+      overflow:hidden;
+      border-radius:22px;
+      background:#E8E0D4;
+    }
+
+    .product-modal-main img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .product-modal-thumbs{
+      display:flex;
+      gap:9px;
+      margin-top:10px;
+      overflow-x:auto;
+      padding-bottom:3px;
+    }
+
+    .product-modal-thumb{
+      width:76px;
+      height:76px;
+      flex:0 0 auto;
+      padding:0;
+      overflow:hidden;
+      border:2px solid transparent;
+      border-radius:14px;
+      background:#E8E0D4;
+      cursor:pointer;
+    }
+
+    .product-modal-thumb.active{
+      border-color:var(--clay);
+    }
+
+    .product-modal-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .product-modal-content{
+      padding:28px 22px 30px;
+    }
+
+    .product-modal-worknumber{
+      margin:0 0 6px;
+      color:var(--clay);
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    .product-modal-content h2{
+      margin:6px 0 14px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:clamp(2.35rem,8vw,4rem);
+      font-weight:500;
+      line-height:.98;
+    }
+
+    .product-modal-facts{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      margin:0 0 22px;
+    }
+
+    .product-status{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:7px 12px;
+      border:1px solid rgba(41,39,34,.14);
+      border-radius:999px;
+      background:rgba(216,205,189,.52);
+      font-size:.78rem;
+      font-weight:900;
+    }
+
+    .product-status[data-status="available"]{background:rgba(154,154,128,.28)}
+    .product-status[data-status="reserved"]{background:rgba(180,119,85,.20)}
+    .product-status[data-status="home"]{background:rgba(216,205,189,.62)}
+
+    .product-modal-price{
+      margin:0;
+      font-size:1.4rem;
+      font-weight:900;
+    }
+
+    .product-modal-story{
+      padding-top:20px;
+      border-top:1px solid rgba(180,119,85,.20);
+    }
+
+    .product-modal-story h3,
+    .product-modal-process h3{
+      margin:0 0 8px;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.55rem;
+      font-weight:600;
+    }
+
+    .product-modal-story p{
+      margin:0;
+      color:var(--gray);
+      white-space:pre-line;
+    }
+
+    .product-modal-shipping{
+      margin:14px 0 0;
+      color:var(--gray);
+      font-size:.9rem;
+    }
+
+    .product-modal-process{
+      margin-top:22px;
+      padding-top:20px;
+      border-top:1px solid rgba(180,119,85,.20);
+    }
+
+    .product-modal-process[hidden]{display:none}
+
+    .product-modal-actions{
+      margin-top:22px;
+    }
+
+    .product-modal-actions:empty{display:none}
+
     @media(min-width:820px){
       .background-logo img{
         width:min(132vw,1900px);
@@ -1052,6 +1286,9 @@
       .featured-grid{grid-template-columns:repeat(3,1fr)}
       .collection-grid{grid-template-columns:repeat(2,1fr)}
       .steps-grid{grid-template-columns:repeat(4,1fr)}
+      .product-modal-layout{grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr)}
+      .product-modal-gallery{padding:28px}
+      .product-modal-content{padding:48px 42px 42px}
     }
 
     @media(min-width:1180px){
@@ -1107,9 +1344,16 @@
       .collection-image{width:96px;height:112px}
       .collection-summary::after{content:"+";margin-right:12px;font-size:1.15rem}
       details.collection-card[open] .collection-summary::after{content:"–"}
+      .collection-card-button::after{content:"›";margin-right:12px;font-size:1.45rem}
       .collection-summary-content strong{font-size:1.3rem}
       .product-actions{display:grid}
       .product-actions .button{width:100%}
+      .product-modal{padding:8px}
+      .product-modal-dialog{max-height:calc(100svh - 16px);border-radius:22px}
+      .product-modal-gallery{padding:12px}
+      .product-modal-content{padding:24px 18px 28px}
+      .product-modal-close{top:8px;margin:8px 8px -54px 0}
+      .product-modal-thumb{width:64px;height:64px}
     }
 
     @media(max-width:360px){
@@ -1388,6 +1632,48 @@
 
   </div>
 
+  <div class="product-modal" id="productModal" aria-hidden="true">
+    <div
+      class="product-modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="productModalTitle"
+    >
+      <button class="product-modal-close" id="productModalClose" type="button" aria-label="Produktansicht schließen">×</button>
+
+      <div class="product-modal-layout">
+        <div class="product-modal-gallery">
+          <div class="product-modal-main" id="productModalMain"></div>
+          <div class="product-modal-thumbs" id="productModalThumbs" aria-label="Weitere Produktbilder"></div>
+        </div>
+
+        <div class="product-modal-content">
+          <p class="product-modal-worknumber" id="productModalWorkNumber"></p>
+          <span class="product-tag" id="productModalMeta"></span>
+          <h2 id="productModalTitle">Keramik-Unikat</h2>
+
+          <div class="product-modal-facts">
+            <span class="product-status" id="productModalStatus"></span>
+            <p class="product-modal-price" id="productModalPrice"></p>
+          </div>
+
+          <div class="product-modal-story">
+            <h3>Zum Stück</h3>
+            <p id="productModalDescription"></p>
+            <p class="product-modal-shipping" id="productModalShipping"></p>
+          </div>
+
+          <div class="product-modal-process" id="productModalProcess" hidden>
+            <h3>Entstehung</h3>
+            <div class="video-list" id="productModalVideos"></div>
+          </div>
+
+          <div class="product-modal-actions" id="productModalActions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" type="button">×</button>
     <img id="lightboxImage" alt="">
@@ -1475,6 +1761,23 @@
     let collectionCards=[];
     let activeCategory="all";
     let activeSeries="all";
+    let loadedProducts=[];
+    let lastProductTrigger=null;
+
+    const productModal=document.getElementById("productModal");
+    const productModalClose=document.getElementById("productModalClose");
+    const productModalMain=document.getElementById("productModalMain");
+    const productModalThumbs=document.getElementById("productModalThumbs");
+    const productModalWorkNumber=document.getElementById("productModalWorkNumber");
+    const productModalMeta=document.getElementById("productModalMeta");
+    const productModalTitle=document.getElementById("productModalTitle");
+    const productModalStatus=document.getElementById("productModalStatus");
+    const productModalPrice=document.getElementById("productModalPrice");
+    const productModalDescription=document.getElementById("productModalDescription");
+    const productModalShipping=document.getElementById("productModalShipping");
+    const productModalProcess=document.getElementById("productModalProcess");
+    const productModalVideos=document.getElementById("productModalVideos");
+    const productModalActions=document.getElementById("productModalActions");
 
     function escapeHtml(value=""){
       return String(value)
@@ -1535,19 +1838,147 @@
 
     function productMeta(product){
       const category=normalizeCategory(product.category||product.type||product.name||"");
-      const series=String(product.series||"").toLowerCase().includes("eisregen") ? "eisregen" : "einzelstuecke";
-      return {category,series};
+      const collection=String(product.collection||product.series||"").trim();
+      const series=collection.toLowerCase().includes("eisregen") ? "eisregen" : "einzelstuecke";
+      return {category,series,collection};
+    }
+
+    function formatPrice(value){
+      if(value===null || value===undefined || value==="") return "";
+      const number=Number(value);
+      if(Number.isFinite(number)){
+        return new Intl.NumberFormat("de-DE",{
+          style:"currency",
+          currency:"EUR"
+        }).format(number);
+      }
+      return String(value);
+    }
+
+    function displayStatus(value=""){
+      const status=String(value||"Verfügbar");
+      if(status==="Verkauft") return "In neuem Zuhause";
+      return status;
+    }
+
+    function statusKey(value=""){
+      const status=displayStatus(value);
+      if(status==="Reserviert") return "reserved";
+      if(status==="In neuem Zuhause") return "home";
+      return "available";
+    }
+
+    function shippingLabel(value=""){
+      return ({
+        plus_shipping:"zzgl. Versandkosten",
+        included:"Versand inklusive",
+        etsy:"Versandkosten siehe Etsy",
+        pickup_possible:"Abholung möglich",
+        pickup_only:"Nur Abholung",
+        arrangement:"Versand nach Absprache"
+      })[value]||"";
+    }
+
+    function productImages(product){
+      const gallery=Array.isArray(product.gallery)
+        ? product.gallery
+        : (product.gallery ? [product.gallery] : []);
+      return [product.image,...gallery].filter((src,index,array)=>src && array.indexOf(src)===index);
+    }
+
+    function setProductModalImage(src,alt,index){
+      productModalMain.innerHTML=src
+        ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}">`
+        : "";
+      productModalThumbs.querySelectorAll(".product-modal-thumb").forEach((button,buttonIndex)=>{
+        button.classList.toggle("active",buttonIndex===index);
+      });
+    }
+
+    function closeProductModal(){
+      if(!productModal.classList.contains("open")) return;
+      productModal.classList.remove("open");
+      productModal.setAttribute("aria-hidden","true");
+      document.body.classList.remove("product-modal-open");
+      if(lastProductTrigger){
+        lastProductTrigger.focus();
+        lastProductTrigger=null;
+      }
+    }
+
+    function openProductModal(product,trigger){
+      if(!product) return;
+      lastProductTrigger=trigger||null;
+
+      const {category,collection}=productMeta(product);
+      const images=productImages(product);
+      const videos=Array.isArray(product.videos)?product.videos:[];
+      const status=displayStatus(product.status);
+      const shipping=shippingLabel(product.shipping);
+      const shippingNote=String(product.shippingNote||"").trim();
+
+      productModalWorkNumber.textContent=product.workNumber ? `Werkstück ${product.workNumber}` : "";
+      productModalWorkNumber.hidden=!product.workNumber;
+      productModalMeta.textContent=collection
+        ? `${collection} · ${categoryLabel(category)}`
+        : `Einzelstück · ${categoryLabel(category)}`;
+      productModalTitle.textContent=product.name||"Keramik-Unikat";
+      productModalStatus.textContent=status;
+      productModalStatus.dataset.status=statusKey(product.status);
+      productModalPrice.textContent=formatPrice(product.price);
+      productModalPrice.hidden=!productModalPrice.textContent;
+      productModalDescription.textContent=product.description||"Für dieses Stück ist noch keine Beschreibung hinterlegt.";
+
+      const shippingParts=[shipping,shippingNote].filter(Boolean);
+      productModalShipping.textContent=shippingParts.join(" · ");
+      productModalShipping.hidden=shippingParts.length===0;
+
+      productModalThumbs.innerHTML=images.map((src,index)=>`
+        <button
+          class="product-modal-thumb${index===0?" active":""}"
+          type="button"
+          data-image-index="${index}"
+          aria-label="Produktbild ${index+1} anzeigen"
+        >
+          <img src="${escapeHtml(src)}" alt="">
+        </button>
+      `).join("");
+      productModalThumbs.hidden=images.length<=1;
+
+      setProductModalImage(images[0]||"",product.name||"Keramik-Unikat",0);
+
+      productModalThumbs.querySelectorAll(".product-modal-thumb").forEach((button,index)=>{
+        button.addEventListener("click",()=>{
+          setProductModalImage(images[index],product.name||"Keramik-Unikat",index);
+        });
+      });
+
+      productModalVideos.innerHTML=videos.map(videoConsentHtml).join("");
+      productModalProcess.hidden=videos.length===0;
+
+      /* Schritt 6 ersetzt diese bisherige Anfrage-Logik durch Etsy/Kaufen/Anfragen. */
+      productModalActions.innerHTML=status==="Verfügbar"
+        ? `<a class="button" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a>`
+        : "";
+
+      productModal.classList.add("open");
+      productModal.setAttribute("aria-hidden","false");
+      document.body.classList.add("product-modal-open");
+      bindDynamicInteractions();
+      productModalClose.focus();
     }
 
     function renderProducts(products){
-      if(!Array.isArray(products) || products.length===0){
+      loadedProducts=Array.isArray(products)?products:[];
+
+      if(loadedProducts.length===0){
         featuredGrid.innerHTML='<p class="collection-empty">Aktuell sind noch keine Stücke eingetragen.</p>';
         collectionGrid.innerHTML="";
         collectionEmpty.hidden=false;
         return;
       }
 
-      const featured=products.slice(0,3);
+      const featured=loadedProducts.slice(0,3);
       featuredGrid.innerHTML=featured.map(product=>{
         const {category,series}=productMeta(product);
         const videos=Array.isArray(product.videos)?product.videos:[];
@@ -1560,32 +1991,32 @@
             <span class="product-tag">${escapeHtml(seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
             <h3>${escapeHtml(product.name||"Keramik-Unikat")}</h3>
             <p>${escapeHtml(product.description||"")}</p>
-            <p class="price">${escapeHtml(product.status==="Verkauft"?"Verkauft":product.price||"")}</p>
+            <p class="price">${escapeHtml(displayStatus(product.status)==="In neuem Zuhause"?"In neuem Zuhause":formatPrice(product.price))}</p>
             ${videos.length?`<div class="video-list">${videos.map(videoConsentHtml).join("")}</div>`:""}
-            ${product.status!=="Verkauft"?`<a class="button secondary" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a>`:""}
+            ${displayStatus(product.status)==="Verfügbar"?`<a class="button secondary" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a>`:""}
           </div>
         </article>`;
       }).join("");
 
-      collectionGrid.innerHTML=products.map(product=>{
-        const {category,series}=productMeta(product);
-        const videos=Array.isArray(product.videos)?product.videos:[];
-        return `<details class="collection-card" data-category="${category}" data-series="${series}">
-          <summary class="collection-summary">
-            <span class="collection-image lightboxable">${product.image?`<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}</span>
+      collectionGrid.innerHTML=loadedProducts.map((product,index)=>{
+        const {category,series,collection}=productMeta(product);
+        const status=displayStatus(product.status);
+        const priceText=status==="In neuem Zuhause" ? status : formatPrice(product.price);
+        return `<article class="collection-card" data-category="${category}" data-series="${series}">
+          <button
+            class="collection-summary collection-card-button"
+            type="button"
+            data-product-index="${index}"
+            aria-label="${escapeHtml(product.name||"Keramik-Unikat")} ansehen"
+          >
+            <span class="collection-image">${product.image?`<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}</span>
             <span class="collection-summary-content">
-              <span class="product-tag">${escapeHtml(categoryLabel(category))} · ${escapeHtml(seriesLabel(series))}</span>
+              <span class="product-tag">${escapeHtml(collection||seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
               <strong>${escapeHtml(product.name||"Keramik-Unikat")}</strong>
-              <span class="collection-price">${escapeHtml(product.status==="Verkauft"?"Verkauft":product.price||"")}</span>
+              <span class="collection-price">${escapeHtml(priceText)}</span>
             </span>
-          </summary>
-          <div class="collection-details">
-            <p><strong>Zum Stück:</strong> ${escapeHtml(product.description||"")}</p>
-            <p><strong>Status:</strong> ${escapeHtml(product.status||"Verfügbar")}</p>
-            ${videos.length?`<div class="video-list">${videos.map(videoConsentHtml).join("")}</div>`:""}
-            ${product.status!=="Verkauft"?`<div class="product-actions"><a class="button" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a></div>`:""}
-          </div>
-        </details>`;
+          </button>
+        </article>`;
       }).join("");
 
       collectionCards=[...document.querySelectorAll(".collection-card")];
@@ -1600,7 +2031,6 @@
         const matchesSeries=activeSeries==="all" || card.dataset.series===activeSeries;
         const visible=matchesCategory && matchesSeries;
         card.hidden=!visible;
-        if(!visible) card.open=false;
         if(visible) visibleCount++;
       });
       collectionEmpty.hidden=visibleCount!==0;
@@ -1627,7 +2057,18 @@
     }));
 
     function bindDynamicInteractions(){
+      document.querySelectorAll(".collection-card-button").forEach(button=>{
+        if(button.dataset.modalBound==="true") return;
+        button.dataset.modalBound="true";
+        button.addEventListener("click",()=>{
+          const index=Number(button.dataset.productIndex);
+          openProductModal(loadedProducts[index],button);
+        });
+      });
+
       document.querySelectorAll(".load-youtube").forEach(button=>{
+        if(button.dataset.youtubeBound==="true") return;
+        button.dataset.youtubeBound="true";
         button.addEventListener("click",()=>{
           const box=button.closest(".video-consent");
           const id=box?.dataset.youtubeId;
@@ -1643,6 +2084,8 @@
       });
 
       document.querySelectorAll(".lightboxable img").forEach(img=>{
+        if(img.dataset.lightboxBound==="true") return;
+        img.dataset.lightboxBound="true";
         img.addEventListener("click",()=>{
           lightboxImage.src=img.src;
           lightboxImage.alt=img.alt;
@@ -1665,6 +2108,11 @@
         collectionEmpty.hidden=false;
       });
 
+    productModalClose.addEventListener("click",closeProductModal);
+    productModal.addEventListener("click",event=>{
+      if(event.target===productModal) closeProductModal();
+    });
+
     const lightbox=document.getElementById("lightbox");
     const lightboxImage=document.getElementById("lightboxImage");
 
@@ -1681,6 +2129,7 @@
     document.addEventListener("keydown",e=>{
       if(e.key==="Escape"){
         closeMenu();
+        closeProductModal();
         closeLightbox();
       }
     });
