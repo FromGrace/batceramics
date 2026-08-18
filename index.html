@@ -643,6 +643,22 @@
       box-shadow:var(--shadow);
     }
 
+    .featured-card-button{
+      width:100%;
+      display:block;
+      padding:0;
+      border:0;
+      background:transparent;
+      color:inherit;
+      text-align:left;
+      cursor:pointer;
+    }
+
+    .featured-card-button:focus-visible{
+      outline:3px solid rgba(180,119,85,.55);
+      outline-offset:-3px;
+    }
+
     .featured-media{
       position:relative;
       display:block;
@@ -668,8 +684,8 @@
       pointer-events:none;
     }
 
-    .featured-media:hover img,
-    .featured-media:focus-visible img{transform:scale(1.045)}
+    .featured-card-button:hover .featured-media img,
+    .featured-card-button:focus-visible .featured-media img{transform:scale(1.045)}
 
     .video-badge{
       position:absolute;
@@ -1490,7 +1506,7 @@
       .button{width:auto;margin-right:8px}
       .intro-grid{grid-template-columns:repeat(2,1fr)}
       .product-grid{grid-template-columns:repeat(3,1fr)}
-      .featured-grid{grid-template-columns:repeat(3,1fr)}
+      .featured-grid{grid-template-columns:repeat(2,1fr)}
       .collection-grid{grid-template-columns:repeat(2,1fr)}
       .steps-grid{grid-template-columns:repeat(4,1fr)}
       .product-modal-layout{grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr)}
@@ -1500,6 +1516,7 @@
 
     @media(min-width:1180px){
       .intro-grid{grid-template-columns:repeat(4,1fr)}
+      .featured-grid{grid-template-columns:repeat(3,1fr)}
     }
 
     @media(max-width:600px){
@@ -1720,9 +1737,9 @@
       </section>
 
       <section id="aktuell">
-        <p class="section-kicker">Aktuelle Stücke</p>
+        <p class="section-kicker">Ausgewählte Stücke</p>
         <h2 class="section-title">Deine nächste Lieblingskeramik könnte hier stehen.</h2>
-        <p class="section-lead">Drei ausgewählte Stücke. Ein Klick auf das Bild führt dich direkt zum Video über die Entstehung des jeweiligen Unikats.</p>
+        <p class="section-lead">Ausgewählte Stücke. Ein Klick öffnet das Unikat mit Bildern, Geschichte und dokumentierter Entstehung.</p>
 
         <div class="featured-grid" id="featuredGrid">
           <p class="collection-empty">Produkte werden geladen …</p>
@@ -2368,25 +2385,43 @@ Viele Grüße`;
         return;
       }
 
-      const featured=loadedProducts.slice(0,3);
-      featuredGrid.innerHTML=featured.map(product=>{
-        const {category,series}=productMeta(product);
-        const videos=Array.isArray(product.videos)?product.videos:[];
-        return `<article class="featured-card">
-          <div class="featured-media lightboxable">
-            ${product.image?`<img src="${escapeHtml(productImageUrl(product.image))}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}
-            ${videos.length?'<span class="video-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>Video vorhanden</span>':""}
-          </div>
-          <div class="featured-content">
-            <span class="product-tag">${escapeHtml(seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
-            <h3>${escapeHtml(product.name||"Keramik-Unikat")}</h3>
-            <p>${escapeHtml(product.description||"")}</p>
-            <p class="price">${escapeHtml(displayStatus(product.status)==="In neuem Zuhause"?"In neuem Zuhause":formatPrice(product.price))}</p>
-            ${videos.length?`<div class="video-list">${videos.map(videoConsentHtml).join("")}</div>`:""}
-            ${productActionHtml(product,{secondaryInquiry:true})}
-          </div>
-        </article>`;
-      }).join("");
+      const featured=loadedProducts
+        .map((product,index)=>({product,index}))
+        .filter(({product})=>product.featured===true || String(product.featured||"").toLowerCase()==="true");
+
+      if(featured.length===0){
+        featuredGrid.innerHTML='<p class="collection-empty">Aktuell sind keine ausgewählten Stücke markiert.</p>';
+      }else{
+        featuredGrid.innerHTML=featured.map(({product,index})=>{
+          const {category,series,collection}=productMeta(product);
+          const validVideos=(Array.isArray(product.videos)?product.videos:[])
+            .filter(video=>youtubeId(video?.youtube||""));
+          const status=displayStatus(product.status);
+          const priceText=status==="In neuem Zuhause" ? status : formatPrice(product.price);
+          const workNumber=String(product.workNumber||"").trim();
+
+          return `<article class="featured-card">
+            <button
+              class="featured-card-button"
+              type="button"
+              data-product-index="${index}"
+              aria-label="${escapeHtml(product.name||"Keramik-Unikat")} ansehen"
+            >
+              <span class="featured-media">
+                ${product.image?`<img src="${escapeHtml(productImageUrl(product.image))}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}
+                ${validVideos.length?'<span class="video-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>Entstehung</span>':""}
+              </span>
+              <span class="featured-content">
+                <span class="product-tag">${escapeHtml(collection||seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
+                ${workNumber?`<span class="note">Werkstück ${escapeHtml(workNumber)}</span>`:""}
+                <h3>${escapeHtml(product.name||"Keramik-Unikat")}</h3>
+                <p>${escapeHtml(product.description||"")}</p>
+                <span class="price">${escapeHtml(priceText)}</span>
+              </span>
+            </button>
+          </article>`;
+        }).join("");
+      }
 
       collectionGrid.innerHTML=loadedProducts.map((product,index)=>{
         const {category,series,collection}=productMeta(product);
@@ -2453,6 +2488,15 @@ Viele Grüße`;
         button.addEventListener("click",()=>{
           const product=inquiryProductById(button.dataset.inquiryId);
           openInquiryModal(product,button);
+        });
+      });
+
+      document.querySelectorAll(".featured-card-button").forEach(button=>{
+        if(button.dataset.modalBound==="true") return;
+        button.dataset.modalBound="true";
+        button.addEventListener("click",()=>{
+          const index=Number(button.dataset.productIndex);
+          openProductModal(loadedProducts[index],button);
         });
       });
 
