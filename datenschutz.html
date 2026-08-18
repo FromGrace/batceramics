@@ -3,83 +3,156 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datenschutz – MW - Bat Ceramics</title>
-  <meta name="description" content="Datenschutzerklärung von MW - Bat Ceramics.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Datenschutz – Bat Ceramics</title>
+  <meta name="description" content="Datenschutzerklärung von Bat Ceramics.">
+  <meta name="robots" content="index,follow">
+
   <style>
-    :root{--chalk:#F4F0E8;--taupe:#D8CDBD;--clay:#B47755;--charcoal:#292722;--gray:#6F685E}
+    :root{
+      --chalk:#F4F0E8;
+      --taupe:#D8CDBD;
+      --clay:#B47755;
+      --charcoal:#292722;
+      --gray:#6F685E;
+      --shadow:0 18px 45px rgba(41,39,34,.12);
+    }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--chalk);color:var(--charcoal);font-family:"DM Sans",Arial,sans-serif;line-height:1.7}
-    .wrap{max-width:900px;margin:0 auto;padding:40px 20px 70px}
-    a{color:var(--clay)}
-    .back{display:inline-block;margin-bottom:28px;text-decoration:none;font-weight:700}
-    h1,h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.15}
-    h1{font-size:clamp(2.8rem,8vw,4.8rem);margin:0 0 14px}
-    h2{font-size:2rem;margin:38px 0 10px}
+    body{
+      margin:0;
+      background:var(--chalk);
+      color:var(--charcoal);
+      font-family:"Aptos","Segoe UI",Arial,Helvetica,sans-serif;
+      line-height:1.7;
+    }
+    a{color:inherit}
+    .site-header{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 18px;
+      background:rgba(244,240,232,.97);
+      border-bottom:1px solid rgba(41,39,34,.12);
+      box-shadow:0 8px 24px rgba(41,39,34,.08);
+    }
+    .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+    .brand-logo{width:46px;height:46px;object-fit:contain;border-radius:50%;background:var(--chalk)}
+    .brand-name{display:block;font-size:1.12rem;font-weight:700;line-height:1}
+    .brand-subtitle{display:block;margin-top:4px;color:var(--clay);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+    .back-link{padding:10px 16px;border:1px solid rgba(41,39,34,.22);border-radius:999px;text-decoration:none;font-weight:700}
+    main{min-height:calc(100vh - 180px);padding:64px 18px 80px}
+    .legal-card{
+      max-width:900px;
+      margin:0 auto;
+      padding:clamp(26px,5vw,52px);
+      border:1px solid rgba(180,119,85,.20);
+      border-radius:32px;
+      background:rgba(244,240,232,.96);
+      box-shadow:var(--shadow);
+    }
+    .kicker{margin:0 0 8px;color:var(--clay);font-size:.76rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+    h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:600;line-height:1.15}
+    h1{margin:0 0 14px;font-size:clamp(2.8rem,8vw,4.8rem)}
+    h2{margin:38px 0 10px;font-size:1.8rem}
+    p{margin:0 0 12px}
     .lead{color:var(--gray);font-size:1.05rem}
-    .card{margin-top:28px;padding:24px;border:1px solid rgba(180,119,85,.22);border-radius:24px;background:rgba(255,255,255,.28)}
-    footer{margin-top:48px;padding-top:24px;border-top:1px solid rgba(41,39,34,.15);font-size:.9rem;color:var(--gray)}
+    .card{margin:28px 0;padding:20px;border:1px solid rgba(180,119,85,.22);border-radius:20px;background:rgba(216,205,189,.28)}
+    .muted{color:var(--gray)}
+    .external-link{color:var(--clay);font-weight:700}
+    footer{padding:30px 18px;background:var(--charcoal);color:var(--chalk);text-align:center;font-size:.88rem}
+    footer a{display:inline-block;margin:4px 8px}
+    @media(min-width:820px){.site-header{padding:14px 6%}main{padding:90px 6%}}
+    @media(max-width:600px){
+      .brand > span:last-child{display:none}
+      .site-header{min-height:68px;padding:10px 12px}
+      .brand-logo{width:42px;height:42px}
+      .back-link{padding:9px 13px;font-size:.88rem}
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <a class="back" href="index.html">← Zurück zu MW - Bat Ceramics</a>
-    <h1>Datenschutzerklärung</h1>
-    <p class="lead">Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten beim Besuch dieser Website verarbeitet werden.</p>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Zur Startseite von Bat Ceramics">
+      <img class="brand-logo" src="assets/logos/logo.png" alt="Bat Ceramics Logo">
+      <span>
+        <span class="brand-name">Bat Ceramics</span>
+        <span class="brand-subtitle">Handmade pottery</span>
+      </span>
+    </a>
+    <a class="back-link" href="index.html">Zurück zur Website</a>
+  </header>
 
-    <div class="card">
-      <strong>Verantwortliche Stelle</strong><br>
-      MW - Bat Ceramics<br>
-      Melanie Wendt<br>
-      Neustädter Str. 18<br>
-      38723 Seesen<br>
-      Deutschland<br>
-      E-Mail: <a href="mailto:info@batceramics.de">info@batceramics.de</a>
-    </div>
+  <main>
+    <article class="legal-card">
+      <p class="kicker">Rechtliches</p>
+      <h1>Datenschutzerklärung</h1>
+      <p class="lead">Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten beim Besuch und bei der Nutzung dieser Website verarbeitet werden.</p>
 
-    <h2>1. Allgemeine Hinweise</h2>
-    <p>Personenbezogene Daten sind Informationen, mit denen eine Person direkt oder indirekt identifiziert werden kann. Diese Website verarbeitet personenbezogene Daten nur, soweit dies für den technischen Betrieb, die Kommunikation oder ausdrücklich aktivierte Drittinhalte erforderlich ist.</p>
+      <div class="card">
+        <strong>Verantwortliche Stelle</strong><br>
+        MW - Bat Ceramics<br>
+        Melanie Wendt<br>
+        Neustädter Str. 18<br>
+        38723 Seesen<br>
+        Deutschland<br>
+        E-Mail: <a class="external-link" href="mailto:info@batceramics.de">info@batceramics.de</a>
+      </div>
 
-    <h2>2. Hosting und Server-Logdaten</h2>
-    <p>Beim Aufruf einer Website werden technisch notwendige Verbindungsdaten verarbeitet. Dazu können insbesondere IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Datei oder Seite, Browsertyp, Betriebssystem, Referrer-URL und vergleichbare technische Informationen gehören.</p>
-    <p>Die Verarbeitung erfolgt zur sicheren und stabilen Bereitstellung der Website, zur Fehleranalyse und zur Abwehr von Missbrauch. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im sicheren und zuverlässigen Betrieb dieser Website.</p>
-    <p>Die Website wird über einen externen Hosting- bzw. Infrastruktur-Anbieter bereitgestellt. Sobald die endgültige Hosting-Konfiguration von batceramics.de feststeht, sollte dieser Abschnitt um den konkret eingesetzten Anbieter und dessen datenschutzrechtliche Angaben ergänzt werden.</p>
+      <h2>1. Hosting über GitHub Pages</h2>
+      <p>Diese Website wird derzeit über GitHub Pages bereitgestellt. Anbieter der technischen Plattform ist GitHub, Inc. Beim Besuch einer GitHub-Pages-Website wird nach Angaben von GitHub die IP-Adresse des Besuchers zu Sicherheitszwecken protokolliert und gespeichert. Darüber hinaus können technisch erforderliche Verbindungs- und Protokolldaten verarbeitet werden, soweit dies für die Auslieferung und Sicherheit der Website erforderlich ist.</p>
+      <p>Die Verarbeitung erfolgt zur sicheren, stabilen und technisch fehlerfreien Bereitstellung der Website auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im sicheren und zuverlässigen Betrieb unseres Internetauftritts.</p>
+      <p>GitHub beschreibt in seiner Datenschutzerklärung auch internationale Datenübermittlungen und die hierfür eingesetzten Schutzmechanismen. Weitere Informationen findest du in der <a class="external-link" href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von GitHub</a>.</p>
 
-    <h2>3. Kontakt per E-Mail</h2>
-    <p>Wenn du uns per E-Mail kontaktierst, verarbeiten wir die von dir übermittelten Angaben, insbesondere deine E-Mail-Adresse, deinen Namen, den Inhalt deiner Nachricht und gegebenenfalls weitere von dir freiwillig übermittelte Informationen.</p>
-    <p>Die Verarbeitung erfolgt zur Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit sich deine Anfrage auf einen Vertrag oder vorvertragliche Maßnahmen bezieht, ansonsten Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an der Beantwortung von Anfragen.</p>
+      <h2>2. Kontakt per E-Mail</h2>
+      <p>Wenn du uns per E-Mail kontaktierst, verarbeiten wir die von dir übermittelten Angaben, insbesondere deinen Namen, deine E-Mail-Adresse, den Inhalt deiner Nachricht und gegebenenfalls weitere freiwillig mitgeteilte Informationen.</p>
+      <p>Die Verarbeitung erfolgt zur Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit deine Nachricht der Anbahnung oder Durchführung eines Vertrags dient. In sonstigen Fällen erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an der Beantwortung von Anfragen.</p>
 
-    <h2>4. YouTube-Videos</h2>
-    <p>Auf dieser Website können Videos des Dienstes YouTube eingebunden werden. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
-    <p>Die YouTube-Videos werden nicht automatisch beim Aufruf der Seite geladen. Stattdessen erscheint zunächst ein Hinweis bzw. eine Schaltfläche. Erst wenn du das Video aktiv lädst, wird eine Verbindung zu YouTube bzw. Google aufgebaut.</p>
-    <p>Für die Einbettung wird nach Möglichkeit der datenschutzfreundlichere Modus über <code>youtube-nocookie.com</code> verwendet. Dennoch können beim Laden des Videos technische Daten wie deine IP-Adresse und Informationen über dein Endgerät an YouTube bzw. Google übertragen werden. Je nach Nutzung können dabei weitere Daten verarbeitet werden.</p>
-    <p>Rechtsgrundlage für das Laden des YouTube-Players ist deine Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Du entscheidest selbst, ob du den jeweiligen Player laden möchtest.</p>
+      <h2>3. Anfrageformular auf der Website</h2>
+      <p>Bei Produkten ohne Etsy-Link kann über „Anfragen“ ein Formular mit Name, E-Mail-Adresse und Nachricht ausgefüllt werden. Die Eingaben werden nicht an einen eigenen Webserver von Bat Ceramics übertragen und nicht in einer Datenbank dieser Website gespeichert.</p>
+      <p>Erst wenn du „E-Mail vorbereiten“ auswählst, öffnet dein Gerät beziehungsweise Browser dein eingerichtetes E-Mail-Programm mit einer vorbereiteten Nachricht. Für den anschließenden Versand gelten zusätzlich die Datenschutzbedingungen des von dir verwendeten E-Mail-Anbieters.</p>
 
-    <h2>5. Cookies und Tracking</h2>
-    <p>Diese Website setzt derzeit keine eigenen Analyse- oder Marketing-Dienste wie Google Analytics, Meta Pixel oder vergleichbare Tracking-Werkzeuge ein.</p>
-    <p>Solange ein YouTube-Video nicht aktiv geladen wird, wird durch die auf dieser Website vorgesehene Zwei-Klick-Lösung kein YouTube-Player eingebunden. Werden zukünftig zusätzliche Analyse-, Marketing- oder externe Dienste integriert, wird diese Datenschutzerklärung entsprechend angepasst und gegebenenfalls eine Einwilligungslösung ergänzt.</p>
+      <h2>4. YouTube-Videos mit Zwei-Klick-Lösung</h2>
+      <p>Auf dieser Website können Videos des Dienstes YouTube eingebunden werden. Der YouTube-Player wird nicht automatisch beim Aufruf der Produktseite geladen. Zunächst erscheint nur ein Hinweis mit einer Schaltfläche. Erst wenn du „Entstehung ansehen“ aktiv auswählst, wird ein YouTube-Player geladen und eine Verbindung zu YouTube beziehungsweise Google hergestellt.</p>
+      <p>Für die Einbettung wird der erweiterte Datenschutzmodus über <code>youtube-nocookie.com</code> verwendet. Auch dabei können nach dem aktiven Laden des Players personenbezogene und technische Daten, insbesondere die IP-Adresse und Geräteinformationen, an Google beziehungsweise YouTube übermittelt werden. Je nach Nutzung können weitere Daten verarbeitet oder Informationen auf deinem Endgerät gespeichert beziehungsweise ausgelesen werden.</p>
+      <p>Das Laden des YouTube-Players erfolgt auf Grundlage deiner Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO sowie, soweit Informationen auf deinem Endgerät gespeichert oder ausgelesen werden, § 25 Abs. 1 TDDDG. Ohne deinen Klick wird auf dieser Website kein YouTube-iframe eingebunden.</p>
+      <p>Weitere Informationen findest du in der <a class="external-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a>.</p>
 
-    <h2>6. Rechtsgrundlagen</h2>
-    <p>Soweit wir personenbezogene Daten auf Grundlage einer Einwilligung verarbeiten, gilt Art. 6 Abs. 1 lit. a DSGVO. Für vorvertragliche Maßnahmen oder Vertragsabwicklung gilt Art. 6 Abs. 1 lit. b DSGVO. Soweit wir uns auf berechtigte Interessen stützen, erfolgt die Verarbeitung nach Art. 6 Abs. 1 lit. f DSGVO.</p>
+      <h2>5. Links zu Etsy</h2>
+      <p>Bei verfügbaren Produkten kann die Schaltfläche „Kaufen“ auf ein konkretes Angebot bei Etsy führen. Etsy-Inhalte werden auf dieser Website nicht eingebettet. Erst wenn du den Etsy-Link aktiv anklickst, verlässt du Bat Ceramics und es wird eine Verbindung zu Etsy hergestellt.</p>
+      <p>Für die anschließende Verarbeitung personenbezogener Daten auf Etsy gelten die dortigen Datenschutz- und Nutzungsbedingungen. Weitere Informationen findest du in der <a class="external-link" href="https://www.etsy.com/de/legal/privacy" target="_blank" rel="noopener noreferrer">Datenschutzrichtlinie von Etsy</a>.</p>
 
-    <h2>7. Speicherdauer</h2>
-    <p>Wir speichern personenbezogene Daten nur so lange, wie dies für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. Entfällt der Zweck und bestehen keine Aufbewahrungspflichten mehr, werden die Daten gelöscht.</p>
+      <h2>6. Cookies, Tracking und externe Schriftarten</h2>
+      <p>Bat Ceramics setzt auf dieser Website derzeit keine eigenen Analyse- oder Marketingdienste wie Google Analytics oder Meta Pixel ein.</p>
+      <p>Die für die Gestaltung verwendeten Schriftarten werden nicht von Google Fonts oder einem vergleichbaren externen Schriftdienst nachgeladen. Die Website verwendet lokale beziehungsweise auf dem jeweiligen Endgerät vorhandene Systemschriftarten.</p>
+      <p>Vor einem aktiven Klick auf ein YouTube-Video wird kein YouTube-Player geladen. Falls zukünftig zusätzliche Analyse-, Marketing- oder sonstige externe Dienste eingebunden werden, wird diese Datenschutzerklärung entsprechend angepasst und erforderlichenfalls eine zusätzliche Einwilligungslösung eingerichtet.</p>
 
-    <h2>8. Deine Rechte</h2>
-    <p>Du hast im Rahmen der gesetzlichen Voraussetzungen das Recht auf Auskunft über deine gespeicherten personenbezogenen Daten, auf Berichtigung, Löschung oder Einschränkung der Verarbeitung sowie gegebenenfalls auf Datenübertragbarkeit. Außerdem kannst du einer Verarbeitung widersprechen, wenn diese auf Art. 6 Abs. 1 lit. f DSGVO beruht.</p>
-    <p>Eine erteilte Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+      <h2>7. Externe Links</h2>
+      <p>Die Website enthält Links zu externen Angeboten. Eine Verbindung zum jeweiligen externen Anbieter wird grundsätzlich erst hergestellt, wenn du einen solchen Link aktiv öffnest. Für die anschließende Datenverarbeitung ist der jeweilige Anbieter nach seinen eigenen Datenschutzbestimmungen verantwortlich.</p>
 
-    <h2>9. Beschwerderecht</h2>
-    <p>Du hast das Recht, dich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn du der Ansicht bist, dass die Verarbeitung deiner personenbezogenen Daten gegen die DSGVO verstößt.</p>
+      <h2>8. Speicherdauer</h2>
+      <p>Personenbezogene Daten werden nur so lange gespeichert, wie dies für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. E-Mail-Anfragen können insbesondere so lange aufbewahrt werden, wie dies für die Bearbeitung der Anfrage, die Vertragsabwicklung oder gesetzliche Nachweis- und Aufbewahrungspflichten erforderlich ist.</p>
 
-    <h2>10. Aktualität</h2>
-    <p>Diese Datenschutzerklärung wird angepasst, wenn sich die eingesetzten Dienste oder die technische Umsetzung der Website ändern.</p>
+      <h2>9. Deine Rechte</h2>
+      <p>Im Rahmen der gesetzlichen Voraussetzungen hast du insbesondere das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung deiner personenbezogenen Daten sowie gegebenenfalls auf Datenübertragbarkeit. Du kannst einer Verarbeitung widersprechen, wenn diese auf Art. 6 Abs. 1 lit. f DSGVO beruht.</p>
+      <p>Eine erteilte Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.</p>
 
-    <footer>
-      Stand: August 2026 · MW - Bat Ceramics
-    </footer>
+      <h2>10. Beschwerderecht</h2>
+      <p>Du hast das Recht, dich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn du der Ansicht bist, dass die Verarbeitung deiner personenbezogenen Daten gegen die DSGVO verstößt.</p>
+
+      <h2>11. Aktualität</h2>
+      <p>Diese Datenschutzerklärung wird angepasst, wenn sich die eingesetzten Dienste, die Hosting-Konfiguration oder die technische Umsetzung der Website ändern.</p>
+
+      <p class="muted" style="margin-top:32px;">Stand: August 2026</p>
+    </article>
   </main>
+
+  <footer>
+    <p>© 2026 Bat Ceramics · Melanie Wendt</p>
+    <p>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html" aria-current="page">Datenschutz</a>
+    </p>
+  </footer>
 </body>
 </html>
