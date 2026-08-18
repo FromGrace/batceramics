@@ -3,17 +3,17 @@
     {
       "id": "2687c740-547e-43af-95d8-7b71594ded82",
       "workNumber": "1 / 2026",
-      "name": "Test1",
+      "name": "Schüssel",
       "status": "Verfügbar",
       "featured": true,
       "image": "/media/img0433.jpg",
       "gallery": [
         "/media/img0432.jpg"
       ],
-      "category": "Tasse",
-      "price": 2,
+      "category": "Schüssel",
+      "price": 20,
       "shipping": "etsy",
-      "description": "TEst",
+      "description": "Schüsel",
       "videos": [
         {
           "title": "Tasse",
