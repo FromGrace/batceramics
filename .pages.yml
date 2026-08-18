@@ -1,9 +1,12 @@
-# BAT Ceramics – Pages CMS
-# Schritt 3: Produktpflege für Handy/Desktop vorbereiten
-# Die Website-Darstellung wird erst in späteren Schritten angepasst.
+from pathlib import Path
+import yaml
+
+content = """# BAT Ceramics – Pages CMS
+# Produktpflege für Handy und Desktop
+# Zentrale Produktdaten: content/products.json
 
 media:
-  # Produktbilder aus Pages CMS bleiben im bereits verwendeten Ordner media/.
+  # Produktbilder aus Pages CMS
   - name: product_images
     label: Produktbilder
     input: media
@@ -12,7 +15,7 @@ media:
     extensions: [jpg, jpeg, png, webp]
     rename: safe
 
-  # Feste Bilder der Website (Hero etc.) bleiben getrennt.
+  # Feste Bilder der Website, z. B. Hero-Bilder
   - name: site_images
     label: Website-Bilder
     input: assets/images
@@ -21,7 +24,7 @@ media:
     extensions: [jpg, jpeg, png, webp]
     rename: safe
 
-  # Feste Website-Videos wie das Hero-Video.
+  # Feste Website-Videos, z. B. Hero-Video
   - name: site_videos
     label: Website-Videos
     input: assets/videos
@@ -30,7 +33,7 @@ media:
     extensions: [mp4, mov, webm]
     rename: safe
 
-  # Logos bleiben in ihrem eigenen Ordner.
+  # Logos
   - name: logos
     label: Logos
     input: assets/logos
@@ -45,11 +48,15 @@ content:
     type: file
     path: content/products.json
     format: json
+
     operations:
       delete: false
+
     fields:
-      # content/products.json bleibt ein Objekt mit dem Schlüssel "products".
-      # Das entspricht der bestehenden Website-Logik data.products.
+      # Die JSON-Datei bleibt:
+      # {
+      #   "products": [...]
+      # }
       - name: products
         label: Produkte
         type: object
@@ -57,9 +64,10 @@ content:
           collapsible:
             collapsed: true
             summary: "{name} · {workNumber}"
+
         fields:
-          # Technische ID: stabil und unabhängig von Name/Werkstücknummer.
-          # Für die normale Pflege nicht sichtbar und nicht editierbar.
+          # Interne technische ID.
+          # Wird automatisch erzeugt und soll nicht manuell verändert werden.
           - name: id
             type: uuid
             hidden: true
@@ -67,6 +75,7 @@ content:
               editable: false
               generate: false
 
+          # Frei wählbare Werkstücknummer, z. B. 6 / 2026.
           - name: workNumber
             label: Werkstücknummer
             type: string
@@ -94,14 +103,15 @@ content:
                 - name: In neuem Zuhause
                   label: In neuem Zuhause
                 - name: Verkauft
-                  label: "Verkauft – Altbestand (in Schritt 4 umstellen)"
+                  label: "Verkauft – Altbestand (später auf „In neuem Zuhause“ umstellen)"
               placeholder: Status auswählen
 
+          # Beliebig viele Produkte können hervorgehoben werden.
           - name: featured
             label: Ausgewähltes Stück
             type: boolean
             default: false
-            description: "Aktivieren, wenn das Stück zusätzlich im Bereich „Ausgewählte Stücke“ erscheinen soll. Beliebig viele Stücke sind möglich."
+            description: "Aktivieren, wenn das Stück zusätzlich im Bereich „Ausgewählte Stücke“ erscheinen soll."
 
           - name: image
             label: Hauptbild
@@ -156,10 +166,29 @@ content:
             options:
               min: 0
 
+          - name: shipping
+            label: Versand
+            type: select
+            options:
+              values:
+                - name: plus_shipping
+                  label: zzgl. Versandkosten
+                - name: included
+                  label: Versand inklusive
+                - name: etsy
+                  label: Versandkosten siehe Etsy
+                - name: pickup_possible
+                  label: Abholung möglich
+                - name: pickup_only
+                  label: Nur Abholung
+                - name: arrangement
+                  label: Versand nach Absprache
+              placeholder: Versand auswählen
+
           - name: shippingNote
-            label: Versandhinweis
+            label: Zusätzlicher Versandhinweis
             type: string
-            description: "Optional, z. B. „zzgl. Versandkosten“."
+            description: "Optional, z. B. „Versand innerhalb Deutschlands 6,90 €“."
             options:
               maxlength: 160
 
@@ -176,12 +205,14 @@ content:
               collapsible:
                 collapsed: true
                 summary: "{title}"
+
             fields:
               - name: title
                 label: Videotitel
                 type: string
                 options:
                   maxlength: 120
+
               - name: youtube
                 label: YouTube-Link
                 type: string
@@ -190,13 +221,24 @@ content:
           - name: etsyUrl
             label: Etsy-Link
             type: string
-            description: "Optional. Hier einfach den direkten Link zum konkreten Etsy-Produkt einfügen. Wenn das Feld leer bleibt, wird später stattdessen „Anfragen“ angeboten."
+            description: "Optional. Direkten Link zum konkreten Etsy-Produkt einfügen. Bleibt das Feld leer, kann auf der Website stattdessen „Anfragen“ angeboten werden."
 
 settings:
-  # Beim Speichern werden vorhandene, noch nicht migrierte Schlüssel nicht absichtlich entfernt.
+  # Vorhandene, noch nicht im Schema enthaltene Schlüssel bleiben beim Speichern erhalten.
   content:
     merge: true
+
   commit:
     identity: app
     templates:
       update: "BAT Ceramics: Inhalte über Pages CMS aktualisiert"
+"""
+
+# Validate YAML
+parsed = yaml.safe_load(content)
+assert isinstance(parsed, dict)
+assert "media" in parsed and "content" in parsed and "settings" in parsed
+
+path = Path("/mnt/data/BAT-Ceramics-pages.yml")
+path.write_text(content, encoding="utf-8")
+print(f"Datei erstellt und YAML erfolgreich validiert: {path}")
