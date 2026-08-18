@@ -1932,11 +1932,33 @@
       })[value]||"";
     }
 
+    function productImageUrl(src=""){
+      const value=String(src||"").trim();
+      if(!value) return "";
+
+      // Externe oder bereits vollständig angegebene URLs unverändert lassen.
+      if(/^(https?:)?\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:")){
+        return value;
+      }
+
+      // Pages CMS speichert Produktbilder z. B. als /media/bild.jpg.
+      // Relativ zur aktuellen index.html auflösen:
+      // GitHub Pages: /batceramics/media/...
+      // eigene Domain: /media/...
+      try{
+        return new URL(value.replace(/^\/+/, ""), document.baseURI).href;
+      }catch(error){
+        return value.replace(/^\/+/, "");
+      }
+    }
+
     function productImages(product){
       const gallery=Array.isArray(product.gallery)
         ? product.gallery
         : (product.gallery ? [product.gallery] : []);
-      return [product.image,...gallery].filter((src,index,array)=>src && array.indexOf(src)===index);
+      return [product.image,...gallery]
+        .filter((src,index,array)=>src && array.indexOf(src)===index)
+        .map(productImageUrl);
     }
 
     function setProductModalImage(src,alt,index){
@@ -2034,7 +2056,7 @@
         const videos=Array.isArray(product.videos)?product.videos:[];
         return `<article class="featured-card">
           <div class="featured-media lightboxable">
-            ${product.image?`<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}
+            ${product.image?`<img src="${escapeHtml(productImageUrl(product.image))}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}
             ${videos.length?'<span class="video-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>Video vorhanden</span>':""}
           </div>
           <div class="featured-content">
@@ -2059,7 +2081,7 @@
             data-product-index="${index}"
             aria-label="${escapeHtml(product.name||"Keramik-Unikat")} ansehen"
           >
-            <span class="collection-image">${product.image?`<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}</span>
+            <span class="collection-image">${product.image?`<img src="${escapeHtml(productImageUrl(product.image))}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}</span>
             <span class="collection-summary-content">
               <span class="product-tag">${escapeHtml(collection||seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
               <strong>${escapeHtml(product.name||"Keramik-Unikat")}</strong>
