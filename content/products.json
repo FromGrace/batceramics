@@ -5,7 +5,7 @@
       "workNumber": "1 / 2026",
       "name": "Test1",
       "status": "Verfügbar",
-      "featured": false,
+      "featured": true,
       "image": "/media/img0433.jpg",
       "gallery": [
         "/media/img0432.jpg"
