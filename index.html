@@ -1306,7 +1306,7 @@
     .product-modal-process[hidden]{display:none}
 
     .product-modal-actions{
-      margin-top:22px;
+      margin:18px 0 24px;
     }
 
     .product-modal-actions:empty{display:none}
@@ -1749,9 +1749,9 @@
       <section class="collection-section" id="kollektion">
         <p class="section-kicker">Kollektion</p>
         <h2 class="section-title">Alle Stücke. Nach Form und Geschichte sortiert.</h2>
-        <p class="section-lead">Filtere nach Produktart oder nach einer zusammengehörigen Kollektion. Ein Klick auf ein Produkt öffnet weitere Informationen.</p>
+        <p class="section-lead">Filtere nach Produktart, Kollektion oder Status. Ein Klick auf ein Produkt öffnet weitere Informationen.</p>
 
-        <div class="collection-toolbar" aria-label="Kollektion filtern">
+        <div class="collection-toolbar" aria-label="Sortiment filtern">
           <div class="filter-block">
             <span class="filter-label">Produktart</span>
             <div class="filter-buttons" id="categoryFilters">
@@ -1765,12 +1765,20 @@
             </div>
           </div>
 
-          <div class="filter-block">
+          <div class="filter-block" id="collectionFilterBlock">
             <span class="filter-label">Kollektion</span>
-            <div class="filter-buttons" id="seriesFilters">
-              <button class="filter-button active" type="button" data-series="all" aria-pressed="true">Alle</button>
-              <button class="filter-button" type="button" data-series="einzelstuecke" aria-pressed="false">Einzelstücke</button>
-              <button class="filter-button" type="button" data-series="eisregen" aria-pressed="false">Eisregen</button>
+            <div class="filter-buttons" id="collectionFilters">
+              <button class="filter-button active" type="button" data-collection="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <span class="filter-label">Status</span>
+            <div class="filter-buttons" id="statusFilters">
+              <button class="filter-button active" type="button" data-status="all" aria-pressed="true">Alle</button>
+              <button class="filter-button" type="button" data-status="available" aria-pressed="false">Verfügbar</button>
+              <button class="filter-button" type="button" data-status="reserved" aria-pressed="false">Reserviert</button>
+              <button class="filter-button" type="button" data-status="home" aria-pressed="false">In neuem Zuhause</button>
             </div>
           </div>
         </div>
@@ -1883,6 +1891,8 @@
             <p class="product-modal-price" id="productModalPrice"></p>
           </div>
 
+          <div class="product-modal-actions" id="productModalActions"></div>
+
           <div class="product-modal-story">
             <h3>Zum Stück</h3>
             <p id="productModalDescription"></p>
@@ -1893,8 +1903,6 @@
             <h3>Entstehung</h3>
             <div class="video-list" id="productModalVideos"></div>
           </div>
-
-          <div class="product-modal-actions" id="productModalActions"></div>
         </div>
       </div>
     </div>
@@ -2028,10 +2036,14 @@
     const collectionGrid=document.getElementById("collectionGrid");
     const collectionEmpty=document.getElementById("collectionEmpty");
     const categoryButtons=[...document.querySelectorAll("[data-category].filter-button")];
-    const seriesButtons=[...document.querySelectorAll("[data-series].filter-button")];
+    const collectionFilterBlock=document.getElementById("collectionFilterBlock");
+    const collectionFilters=document.getElementById("collectionFilters");
+    const statusButtons=[...document.querySelectorAll("[data-status].filter-button")];
+    let collectionButtons=[];
     let collectionCards=[];
     let activeCategory="all";
-    let activeSeries="all";
+    let activeCollection="all";
+    let activeStatus="all";
     let loadedProducts=[];
     let lastProductTrigger=null;
 
@@ -2097,8 +2109,57 @@
       return ({tassen:"Tasse",teller:"Teller",schuesseln:"Schüssel",kannen:"Kanne",vasen:"Vase",sonstiges:"Unikat"})[category]||"Unikat";
     }
 
-    function seriesLabel(series){
-      return series==="eisregen" ? "Eisregen" : "Einzelstück";
+    function collectionFilterKey(value=""){
+      const collection=String(value||"").trim();
+      if(!collection) return "";
+      return `collection:${encodeURIComponent(collection.toLocaleLowerCase("de-DE"))}`;
+    }
+
+    function collectionDisplayName(value=""){
+      return String(value||"").trim();
+    }
+
+    function productTagText(product){
+      const {category,collection}=productMeta(product);
+      return collection
+        ? `${collection} · ${categoryLabel(category)}`
+        : categoryLabel(category);
+    }
+
+    function renderCollectionFilters(products){
+      const names=[];
+      const seen=new Set();
+
+      products.forEach(product=>{
+        const collection=String(product.collection||product.series||"").trim();
+        if(!collection) return;
+
+        const key=collectionFilterKey(collection);
+        if(seen.has(key)) return;
+        seen.add(key);
+        names.push({key,name:collection});
+      });
+
+      names.sort((a,b)=>a.name.localeCompare(b.name,"de",{sensitivity:"base"}));
+
+      // Es werden ausschließlich echte, in Pages CMS gepflegte Kollektionen angezeigt.
+      // Gibt es noch keine Kollektion, wird der gesamte Kollektion-Filter ausgeblendet.
+      collectionFilterBlock.hidden=names.length===0;
+
+      const buttons=[
+        '<button class="filter-button active" type="button" data-collection="all" aria-pressed="true">Alle</button>',
+        ...names.map(item=>`<button class="filter-button" type="button" data-collection="${escapeHtml(item.key)}" aria-pressed="false">${escapeHtml(item.name)}</button>`)
+      ];
+
+      collectionFilters.innerHTML=buttons.join("");
+      collectionButtons=[...collectionFilters.querySelectorAll("[data-collection].filter-button")];
+      activeCollection="all";
+
+      collectionButtons.forEach(button=>button.addEventListener("click",()=>{
+        activeCollection=button.dataset.collection;
+        setActiveFilter(collectionButtons,button);
+        updateCollectionFilters();
+      }));
     }
 
     function videoConsentHtml(video){
@@ -2180,8 +2241,8 @@ Viele Grüße`;
     function productMeta(product){
       const category=normalizeCategory(product.category||product.type||product.name||"");
       const collection=String(product.collection||product.series||"").trim();
-      const series=collection.toLowerCase().includes("eisregen") ? "eisregen" : "einzelstuecke";
-      return {category,series,collection};
+      const collectionKey=collectionFilterKey(collection);
+      return {category,collection,collectionKey};
     }
 
     function formatPrice(value){
@@ -2287,7 +2348,7 @@ Viele Grüße`;
       productModalWorkNumber.hidden=!product.workNumber;
       productModalMeta.textContent=collection
         ? `${collection} · ${categoryLabel(category)}`
-        : `Einzelstück · ${categoryLabel(category)}`;
+        : categoryLabel(category);
       productModalTitle.textContent=product.name||"Keramik-Unikat";
       productModalStatus.textContent=status;
       productModalStatus.dataset.status=statusKey(product.status);
@@ -2393,7 +2454,7 @@ Viele Grüße`;
         featuredGrid.innerHTML='<p class="collection-empty">Aktuell sind keine ausgewählten Stücke markiert.</p>';
       }else{
         featuredGrid.innerHTML=featured.map(({product,index})=>{
-          const {category,series,collection}=productMeta(product);
+          const {category,collection}=productMeta(product);
           const validVideos=(Array.isArray(product.videos)?product.videos:[])
             .filter(video=>youtubeId(video?.youtube||""));
           const status=displayStatus(product.status);
@@ -2412,7 +2473,7 @@ Viele Grüße`;
                 ${validVideos.length?'<span class="video-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>Entstehung</span>':""}
               </span>
               <span class="featured-content">
-                <span class="product-tag">${escapeHtml(collection||seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
+                <span class="product-tag">${escapeHtml(productTagText(product))}</span>
                 ${workNumber?`<span class="note">Werkstück ${escapeHtml(workNumber)}</span>`:""}
                 <h3>${escapeHtml(product.name||"Keramik-Unikat")}</h3>
                 <p>${escapeHtml(product.description||"")}</p>
@@ -2423,11 +2484,20 @@ Viele Grüße`;
         }).join("");
       }
 
+      renderCollectionFilters(loadedProducts);
+
       collectionGrid.innerHTML=loadedProducts.map((product,index)=>{
-        const {category,series,collection}=productMeta(product);
+        const {category,collection,collectionKey}=productMeta(product);
         const status=displayStatus(product.status);
+        const statusFilter=statusKey(product.status);
         const priceText=status==="In neuem Zuhause" ? status : formatPrice(product.price);
-        return `<article class="collection-card" data-category="${category}" data-series="${series}">
+
+        return `<article
+          class="collection-card"
+          data-category="${escapeHtml(category)}"
+          data-collection="${escapeHtml(collectionKey)}"
+          data-status="${escapeHtml(statusFilter)}"
+        >
           <button
             class="collection-summary collection-card-button"
             type="button"
@@ -2436,7 +2506,7 @@ Viele Grüße`;
           >
             <span class="collection-image">${product.image?`<img src="${escapeHtml(productImageUrl(product.image))}" alt="${escapeHtml(product.name||"Keramik-Unikat")}">`:""}</span>
             <span class="collection-summary-content">
-              <span class="product-tag">${escapeHtml(collection||seriesLabel(series))} · ${escapeHtml(categoryLabel(category))}</span>
+              <span class="product-tag">${escapeHtml(productTagText(product))}</span>
               <strong>${escapeHtml(product.name||"Keramik-Unikat")}</strong>
               <span class="collection-price">${escapeHtml(priceText)}</span>
             </span>
@@ -2451,13 +2521,17 @@ Viele Grüße`;
 
     function updateCollectionFilters(){
       let visibleCount=0;
+
       collectionCards.forEach(card=>{
         const matchesCategory=activeCategory==="all" || card.dataset.category===activeCategory;
-        const matchesSeries=activeSeries==="all" || card.dataset.series===activeSeries;
-        const visible=matchesCategory && matchesSeries;
+        const matchesCollection=activeCollection==="all" || card.dataset.collection===activeCollection;
+        const matchesStatus=activeStatus==="all" || card.dataset.status===activeStatus;
+        const visible=matchesCategory && matchesCollection && matchesStatus;
+
         card.hidden=!visible;
         if(visible) visibleCount++;
       });
+
       collectionEmpty.hidden=visibleCount!==0;
     }
 
@@ -2475,9 +2549,9 @@ Viele Grüße`;
       updateCollectionFilters();
     }));
 
-    seriesButtons.forEach(button=>button.addEventListener("click",()=>{
-      activeSeries=button.dataset.series;
-      setActiveFilter(seriesButtons,button);
+    statusButtons.forEach(button=>button.addEventListener("click",()=>{
+      activeStatus=button.dataset.status;
+      setActiveFilter(statusButtons,button);
       updateCollectionFilters();
     }));
 
