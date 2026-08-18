@@ -878,21 +878,59 @@
     }
 
     .video-consent{
-      padding:16px;
-      border:1px solid rgba(180,119,85,.22);
-      border-radius:18px;
-      background:rgba(216,205,189,.38);
+      position:relative;
+      overflow:hidden;
+      padding:18px;
+      border:1px solid rgba(180,119,85,.24);
+      border-radius:20px;
+      background:
+        linear-gradient(135deg,rgba(216,205,189,.50),rgba(244,240,232,.92));
+    }
+
+    .video-consent-head{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:10px;
+    }
+
+    .video-consent-icon{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border-radius:50%;
+      background:var(--charcoal);
+      color:var(--chalk);
+    }
+
+    .video-consent-icon svg{
+      width:20px;
+      height:20px;
+      fill:currentColor;
+    }
+
+    .video-consent-label{
+      display:block;
+      margin-bottom:2px;
+      color:var(--clay);
+      font-size:.7rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
 
     .video-consent strong{
       display:block;
-      margin-bottom:6px;
+      margin:0;
       font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-      font-size:1.3rem;
+      font-size:1.4rem;
+      line-height:1.08;
     }
 
     .video-consent p{
-      margin:0 0 10px;
+      margin:0 0 12px;
       color:var(--gray);
       font-size:.88rem;
     }
@@ -900,10 +938,11 @@
     .video-consent .button{margin:0}
 
     .video-frame{
+      display:block;
       width:100%;
       aspect-ratio:16/9;
       border:0;
-      border-radius:14px;
+      border-radius:18px;
       background:var(--charcoal);
     }
 
@@ -2049,10 +2088,22 @@
       const id=youtubeId(video.youtube||"");
       if(!id) return "";
       const title=escapeHtml(video.title||"Entstehungsvideo");
-      return `<div class="video-consent" data-youtube-id="${escapeHtml(id)}">
-        <strong>${title}</strong>
-        <p>Das Video kommt von YouTube. Erst nach deinem Klick wird eine Verbindung zu YouTube hergestellt.</p>
-        <button class="button secondary load-youtube" type="button">YouTube-Video laden</button>
+      return `<div
+        class="video-consent"
+        data-youtube-id="${escapeHtml(id)}"
+        data-video-title="${title}"
+      >
+        <div class="video-consent-head">
+          <span class="video-consent-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M8.5 7.5v9l7-4.5-7-4.5Z"/></svg>
+          </span>
+          <span>
+            <span class="video-consent-label">Entstehungsvideo</span>
+            <strong>${title}</strong>
+          </span>
+        </div>
+        <p>Erst nach deinem Klick wird das Video von YouTube geladen.</p>
+        <button class="button secondary load-youtube" type="button">Entstehung ansehen</button>
       </div>`;
     }
 
@@ -2191,6 +2242,12 @@ Viele Grüße`;
       productModal.classList.remove("open");
       productModal.setAttribute("aria-hidden","true");
       document.body.classList.remove("product-modal-open");
+
+      // Ein bereits aktiv geladenes YouTube-iframe entfernen.
+      // So stoppt das Video sicher, sobald das Produktfenster geschlossen wird.
+      productModalVideos.innerHTML="";
+      productModalProcess.hidden=true;
+
       if(lastProductTrigger){
         lastProductTrigger.focus();
         lastProductTrigger=null;
@@ -2203,7 +2260,8 @@ Viele Grüße`;
 
       const {category,collection}=productMeta(product);
       const images=productImages(product);
-      const videos=Array.isArray(product.videos)?product.videos:[];
+      const videos=(Array.isArray(product.videos)?product.videos:[])
+        .filter(video=>youtubeId(video?.youtube||""));
       const status=displayStatus(product.status);
       const shipping=shippingLabel(product.shipping);
       const shippingNote=String(product.shippingNote||"").trim();
@@ -2417,7 +2475,9 @@ Viele Grüße`;
           const iframe=document.createElement("iframe");
           iframe.className="video-frame";
           iframe.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1`;
-          iframe.title="YouTube-Video";
+          iframe.title=box?.dataset.videoTitle||"Entstehungsvideo";
+          iframe.loading="lazy";
+          iframe.referrerPolicy="strict-origin-when-cross-origin";
           iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
           iframe.allowFullscreen=true;
           box.replaceWith(iframe);
