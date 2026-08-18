@@ -1254,6 +1254,26 @@
 
     .product-modal-actions:empty{display:none}
 
+    .product-purchase{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:5px;
+    }
+
+    .product-purchase .button{
+      margin:0;
+    }
+
+    .etsy-trust{
+      display:block;
+      padding-left:14px;
+      color:var(--gray);
+      font-size:.78rem;
+      font-weight:600;
+      letter-spacing:.02em;
+    }
+
     @media(min-width:820px){
       .background-logo img{
         width:min(132vw,1900px);
@@ -1354,6 +1374,8 @@
       .product-modal-content{padding:24px 18px 28px}
       .product-modal-close{top:8px;margin:8px 8px -54px 0}
       .product-modal-thumb{width:64px;height:64px}
+      .product-purchase{align-items:stretch}
+      .etsy-trust{padding-left:0;text-align:center}
     }
 
     @media(max-width:360px){
@@ -1831,9 +1853,39 @@
     }
 
     function inquiryHref(product){
-      const subject=`Verfügbarkeit ${product.name||"Keramik"}`;
-      const body=`Hallo Bat Ceramics,\n\nich interessiere mich für ${product.name||"dieses Stück"}. Ist das Stück noch verfügbar?\n\nViele Grüße`;
-      return `mailto:DEINE-EMAIL@BEISPIEL.DE?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const name=product.name||"Keramik-Unikat";
+      const number=String(product.workNumber||"").trim();
+      const subject=`Anfrage zu ${name}${number?` · Werkstück ${number}`:""}`;
+      const body=`Hallo Bat Ceramics,\n\nich interessiere mich für ${name}${number?` (Werkstück ${number})`:""}. Ist das Stück noch verfügbar?\n\nViele Grüße`;
+      return `mailto:info@batceramics.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function etsyProductUrl(product){
+      const raw=String(product.etsyUrl||"").trim();
+      if(!raw) return "";
+      try{
+        const parsed=new URL(raw);
+        const host=parsed.hostname.toLowerCase();
+        const isEtsy=host==="etsy.com" || host.endsWith(".etsy.com");
+        return isEtsy ? parsed.href : "";
+      }catch(error){
+        return "";
+      }
+    }
+
+    function productActionHtml(product,options={}){
+      if(displayStatus(product.status)!=="Verfügbar") return "";
+
+      const etsyUrl=etsyProductUrl(product);
+      if(etsyUrl){
+        return `<div class="product-purchase">
+          <a class="button" href="${escapeHtml(etsyUrl)}" target="_blank" rel="noopener noreferrer">Kaufen</a>
+          <span class="etsy-trust">Sicher über Etsy</span>
+        </div>`;
+      }
+
+      const secondary=options.secondaryInquiry ? " secondary" : "";
+      return `<a class="button${secondary}" href="${inquiryHref(product)}">Anfragen</a>`;
     }
 
     function productMeta(product){
@@ -1956,10 +2008,7 @@
       productModalVideos.innerHTML=videos.map(videoConsentHtml).join("");
       productModalProcess.hidden=videos.length===0;
 
-      /* Schritt 6 ersetzt diese bisherige Anfrage-Logik durch Etsy/Kaufen/Anfragen. */
-      productModalActions.innerHTML=status==="Verfügbar"
-        ? `<a class="button" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a>`
-        : "";
+      productModalActions.innerHTML=productActionHtml(product);
 
       productModal.classList.add("open");
       productModal.setAttribute("aria-hidden","false");
@@ -1993,7 +2042,7 @@
             <p>${escapeHtml(product.description||"")}</p>
             <p class="price">${escapeHtml(displayStatus(product.status)==="In neuem Zuhause"?"In neuem Zuhause":formatPrice(product.price))}</p>
             ${videos.length?`<div class="video-list">${videos.map(videoConsentHtml).join("")}</div>`:""}
-            ${displayStatus(product.status)==="Verfügbar"?`<a class="button secondary" href="${inquiryHref(product)}">Verfügbarkeit anfragen</a>`:""}
+            ${productActionHtml(product,{secondaryInquiry:true})}
           </div>
         </article>`;
       }).join("");
