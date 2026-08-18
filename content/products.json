@@ -7,6 +7,9 @@
       "status": "Verfügbar",
       "featured": false,
       "image": "/media/img0433.jpg",
+      "gallery": [
+        "/media/img0432.jpg"
+      ],
       "category": "Tasse",
       "price": 2,
       "shipping": "etsy",
