@@ -38,7 +38,8 @@
     }
     body.menu-open,
     body.lightbox-open,
-    body.product-modal-open{overflow:hidden}
+    body.product-modal-open,
+    body.inquiry-modal-open{overflow:hidden}
     a{color:inherit}
     img{display:block;max-width:100%}
     button{font:inherit}
@@ -1275,6 +1276,152 @@
       letter-spacing:.02em;
     }
 
+    .inquiry-modal{
+      position:fixed;
+      inset:0;
+      z-index:2400;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+      background:rgba(41,39,34,.86);
+      backdrop-filter:blur(8px);
+    }
+
+    .inquiry-modal.open{display:flex}
+
+    .inquiry-dialog{
+      position:relative;
+      width:min(720px,100%);
+      max-height:calc(100svh - 28px);
+      overflow:auto;
+      border:1px solid rgba(216,205,189,.68);
+      border-radius:30px;
+      background:var(--chalk);
+      box-shadow:0 30px 80px rgba(0,0,0,.30);
+    }
+
+    .inquiry-close{
+      position:sticky;
+      top:12px;
+      z-index:3;
+      float:right;
+      width:44px;
+      height:44px;
+      margin:12px 12px -56px 0;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(41,39,34,.15);
+      border-radius:50%;
+      background:rgba(244,240,232,.97);
+      color:var(--charcoal);
+      font-size:1.55rem;
+      line-height:1;
+      cursor:pointer;
+      box-shadow:0 8px 22px rgba(41,39,34,.12);
+    }
+
+    .inquiry-close:hover,
+    .inquiry-close:focus-visible{
+      background:var(--clay);
+      color:var(--chalk);
+      outline:none;
+    }
+
+    .inquiry-content{
+      padding:34px 24px 28px;
+    }
+
+    .inquiry-kicker{
+      margin:0 54px 5px 0;
+      color:var(--clay);
+      font-size:.75rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    .inquiry-content h2{
+      margin:0 54px 8px 0;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:clamp(2.15rem,7vw,3.5rem);
+      font-weight:500;
+      line-height:1;
+    }
+
+    .inquiry-product-summary{
+      margin:20px 0 24px;
+      padding:15px 17px;
+      border:1px solid rgba(180,119,85,.20);
+      border-radius:18px;
+      background:rgba(216,205,189,.38);
+    }
+
+    .inquiry-product-summary strong{
+      display:block;
+      font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+      font-size:1.3rem;
+      line-height:1.15;
+    }
+
+    .inquiry-product-summary span{
+      display:block;
+      margin-top:4px;
+      color:var(--gray);
+      font-size:.88rem;
+    }
+
+    .inquiry-form{
+      display:grid;
+      gap:16px;
+    }
+
+    .inquiry-field{
+      display:grid;
+      gap:6px;
+    }
+
+    .inquiry-field label{
+      font-weight:800;
+      font-size:.9rem;
+    }
+
+    .inquiry-field input,
+    .inquiry-field textarea{
+      width:100%;
+      border:1px solid rgba(41,39,34,.24);
+      border-radius:14px;
+      background:rgba(255,255,255,.48);
+      color:var(--charcoal);
+      font:inherit;
+      padding:12px 14px;
+      outline:none;
+    }
+
+    .inquiry-field textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+
+    .inquiry-field input:focus,
+    .inquiry-field textarea:focus{
+      border-color:var(--clay);
+      box-shadow:0 0 0 3px rgba(180,119,85,.14);
+    }
+
+    .inquiry-note{
+      margin:0;
+      color:var(--gray);
+      font-size:.82rem;
+      line-height:1.5;
+    }
+
+    .inquiry-submit{
+      margin:0;
+      border:2px solid var(--charcoal);
+      cursor:pointer;
+    }
+
     @media(min-width:820px){
       .background-logo img{
         width:min(132vw,1900px);
@@ -1577,7 +1724,7 @@
         </div>
 
         <p class="collection-empty" id="collectionEmpty" hidden>Für diese Filterkombination sind aktuell keine Stücke eingetragen.</p>
-        <p class="purchase-note"><strong>Kauf ohne Shop-Backend:</strong> „Verfügbarkeit anfragen“ öffnet nur dein E-Mail-Programm. Es werden auf dieser Website keine Zahlungs- oder Kundendaten gespeichert und durch den Klick noch keine Bestellung ausgelöst.</p>
+        <p class="purchase-note"><strong>Anfrage ohne Shop-Backend:</strong> Bei Stücken ohne Etsy-Link öffnet „Anfragen“ zuerst ein Formular auf dieser Website. Beim anschließenden Vorbereiten der Anfrage wird dein E-Mail-Programm geöffnet; die Website speichert die eingegebenen Kontaktdaten nicht.</p>
       </section>
 
       <section id="fragen">
@@ -1697,6 +1844,51 @@
     </div>
   </div>
 
+  <div class="inquiry-modal" id="inquiryModal" aria-hidden="true">
+    <div
+      class="inquiry-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="inquiryTitle"
+    >
+      <button class="inquiry-close" id="inquiryClose" type="button" aria-label="Anfragefenster schließen">×</button>
+
+      <div class="inquiry-content">
+        <p class="inquiry-kicker">Unverbindliche Anfrage</p>
+        <h2 id="inquiryTitle">Dieses Stück anfragen</h2>
+
+        <div class="inquiry-product-summary">
+          <strong id="inquiryProductName">Keramik-Unikat</strong>
+          <span id="inquiryProductMeta"></span>
+        </div>
+
+        <form class="inquiry-form" id="inquiryForm">
+          <div class="inquiry-field">
+            <label for="inquiryName">Name</label>
+            <input id="inquiryName" name="name" type="text" autocomplete="name" required>
+          </div>
+
+          <div class="inquiry-field">
+            <label for="inquiryEmail">E-Mail</label>
+            <input id="inquiryEmail" name="email" type="email" autocomplete="email" required>
+          </div>
+
+          <div class="inquiry-field">
+            <label for="inquiryMessage">Nachricht</label>
+            <textarea id="inquiryMessage" name="message" required></textarea>
+          </div>
+
+          <p class="inquiry-note">
+            Beim Klick auf „E-Mail vorbereiten“ wird dein E-Mail-Programm geöffnet.
+            Die Angaben werden nicht in einer Datenbank dieser Website gespeichert.
+          </p>
+
+          <button class="button inquiry-submit" type="submit">E-Mail vorbereiten</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" type="button">×</button>
     <img id="lightboxImage" alt="">
@@ -1802,6 +1994,17 @@
     const productModalVideos=document.getElementById("productModalVideos");
     const productModalActions=document.getElementById("productModalActions");
 
+    const inquiryModal=document.getElementById("inquiryModal");
+    const inquiryClose=document.getElementById("inquiryClose");
+    const inquiryForm=document.getElementById("inquiryForm");
+    const inquiryProductName=document.getElementById("inquiryProductName");
+    const inquiryProductMeta=document.getElementById("inquiryProductMeta");
+    const inquiryName=document.getElementById("inquiryName");
+    const inquiryEmail=document.getElementById("inquiryEmail");
+    const inquiryMessage=document.getElementById("inquiryMessage");
+    let activeInquiryProduct=null;
+    let lastInquiryTrigger=null;
+
     function escapeHtml(value=""){
       return String(value)
         .replaceAll("&","&amp;")
@@ -1853,12 +2056,25 @@
       </div>`;
     }
 
-    function inquiryHref(product){
-      const name=product.name||"Keramik-Unikat";
-      const number=String(product.workNumber||"").trim();
-      const subject=`Anfrage zu ${name}${number?` · Werkstück ${number}`:""}`;
-      const body=`Hallo Bat Ceramics,\n\nich interessiere mich für ${name}${number?` (Werkstück ${number})`:""}. Ist das Stück noch verfügbar?\n\nViele Grüße`;
-      return `mailto:info@batceramics.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    function inquiryProductById(id=""){
+      return loadedProducts.find(product=>String(product.id||"")===String(id))||null;
+    }
+
+    function inquirySubject(product){
+      const name=product?.name||"Keramik-Unikat";
+      const number=String(product?.workNumber||"").trim();
+      return `Anfrage zu ${name}${number?` · Werkstück ${number}`:""}`;
+    }
+
+    function inquiryDefaultMessage(product){
+      const name=product?.name||"dieses Stück";
+      const number=String(product?.workNumber||"").trim();
+      return `Hallo Bat Ceramics,
+
+ich interessiere mich für ${name}${number?` (Werkstück ${number})`:""}.
+Ist das Stück noch verfügbar?
+
+Viele Grüße`;
     }
 
     function etsyProductUrl(product){
@@ -1886,7 +2102,11 @@
       }
 
       const secondary=options.secondaryInquiry ? " secondary" : "";
-      return `<a class="button${secondary}" href="${inquiryHref(product)}">Anfragen</a>`;
+      return `<button
+        class="button${secondary} open-inquiry"
+        type="button"
+        data-inquiry-id="${escapeHtml(product.id||"")}"
+      >Anfragen</button>`;
     }
 
     function productMeta(product){
@@ -2036,6 +2256,50 @@
       productModalClose.focus();
     }
 
+    function closeInquiryModal(){
+      if(!inquiryModal.classList.contains("open")) return;
+      inquiryModal.classList.remove("open");
+      inquiryModal.setAttribute("aria-hidden","true");
+      document.body.classList.remove("inquiry-modal-open");
+      activeInquiryProduct=null;
+
+      if(lastInquiryTrigger){
+        lastInquiryTrigger.focus();
+        lastInquiryTrigger=null;
+      }
+    }
+
+    function openInquiryModal(product,trigger){
+      if(!product || displayStatus(product.status)!=="Verfügbar" || etsyProductUrl(product)) return;
+
+      activeInquiryProduct=product;
+      lastInquiryTrigger=trigger||null;
+
+      const number=String(product.workNumber||"").trim();
+      const price=formatPrice(product.price);
+      const shipping=shippingLabel(product.shipping);
+      const shippingNote=String(product.shippingNote||"").trim();
+      const metaParts=[
+        number ? `Werkstück ${number}` : "",
+        price,
+        shipping,
+        shippingNote
+      ].filter(Boolean);
+
+      inquiryProductName.textContent=product.name||"Keramik-Unikat";
+      inquiryProductMeta.textContent=metaParts.join(" · ");
+      inquiryProductMeta.hidden=metaParts.length===0;
+
+      inquiryName.value="";
+      inquiryEmail.value="";
+      inquiryMessage.value=inquiryDefaultMessage(product);
+
+      inquiryModal.classList.add("open");
+      inquiryModal.setAttribute("aria-hidden","false");
+      document.body.classList.add("inquiry-modal-open");
+      inquiryName.focus();
+    }
+
     function renderProducts(products){
       loadedProducts=Array.isArray(products)?products:[];
 
@@ -2125,6 +2389,15 @@
     }));
 
     function bindDynamicInteractions(){
+      document.querySelectorAll(".open-inquiry").forEach(button=>{
+        if(button.dataset.inquiryBound==="true") return;
+        button.dataset.inquiryBound="true";
+        button.addEventListener("click",()=>{
+          const product=inquiryProductById(button.dataset.inquiryId);
+          openInquiryModal(product,button);
+        });
+      });
+
       document.querySelectorAll(".collection-card-button").forEach(button=>{
         if(button.dataset.modalBound==="true") return;
         button.dataset.modalBound="true";
@@ -2176,6 +2449,42 @@
         collectionEmpty.hidden=false;
       });
 
+    inquiryClose.addEventListener("click",closeInquiryModal);
+    inquiryModal.addEventListener("click",event=>{
+      if(event.target===inquiryModal) closeInquiryModal();
+    });
+
+    inquiryForm.addEventListener("submit",event=>{
+      event.preventDefault();
+      if(!activeInquiryProduct || !inquiryForm.reportValidity()) return;
+
+      const subject=inquirySubject(activeInquiryProduct);
+      const productName=activeInquiryProduct.name||"Keramik-Unikat";
+      const number=String(activeInquiryProduct.workNumber||"").trim();
+      const price=formatPrice(activeInquiryProduct.price);
+      const shipping=shippingLabel(activeInquiryProduct.shipping);
+      const shippingNote=String(activeInquiryProduct.shippingNote||"").trim();
+
+      const details=[
+        `Produkt: ${productName}${number?` · Werkstück ${number}`:""}`,
+        price ? `Preis: ${price}` : "",
+        shipping ? `Versand: ${shipping}` : "",
+        shippingNote ? `Versandhinweis: ${shippingNote}` : ""
+      ].filter(Boolean).join("\n");
+
+      const body=[
+        `Name: ${inquiryName.value.trim()}`,
+        `E-Mail: ${inquiryEmail.value.trim()}`,
+        "",
+        details,
+        "",
+        "Nachricht:",
+        inquiryMessage.value.trim()
+      ].join("\n");
+
+      window.location.href=`mailto:info@batceramics.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+
     productModalClose.addEventListener("click",closeProductModal);
     productModal.addEventListener("click",event=>{
       if(event.target===productModal) closeProductModal();
@@ -2196,6 +2505,10 @@
 
     document.addEventListener("keydown",e=>{
       if(e.key==="Escape"){
+        if(inquiryModal.classList.contains("open")){
+          closeInquiryModal();
+          return;
+        }
         closeMenu();
         closeProductModal();
         closeLightbox();
