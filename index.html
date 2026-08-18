@@ -1936,20 +1936,16 @@
       const value=String(src||"").trim();
       if(!value) return "";
 
-      // Externe oder bereits vollständig angegebene URLs unverändert lassen.
+      // Externe URLs unverändert lassen.
       if(/^(https?:)?\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:")){
         return value;
       }
 
-      // Pages CMS speichert Produktbilder z. B. als /media/bild.jpg.
-      // Relativ zur aktuellen index.html auflösen:
-      // GitHub Pages: /batceramics/media/...
-      // eigene Domain: /media/...
-      try{
-        return new URL(value.replace(/^\/+/, ""), document.baseURI).href;
-      }catch(error){
-        return value.replace(/^\/+/, "");
-      }
+      // Pages CMS speichert z. B. /media/img0433.jpg.
+      // Ohne führenden Slash wird daraus ein relativer Pfad:
+      // GitHub Pages -> /batceramics/media/...
+      // eigene Domain -> /media/...
+      return value.replace(/^\/+/, "");
     }
 
     function productImages(product){
