@@ -1,6 +1,10 @@
 # BAT Ceramics – Pages CMS
 # Produktpflege für Handy und Desktop
 # Zentrale Produktdaten: content/products.json
+#
+# Kollektionen werden separat unter "Kollektionen" gepflegt.
+# Beim Produkt wird anschließend eine bestehende Kollektion ausgewählt.
+# In products.json wird weiterhin nur der Kollektionname als Text gespeichert.
 
 media:
   # Produktbilder aus Pages CMS
@@ -40,6 +44,37 @@ media:
     rename: false
 
 content:
+  # Zentrale Liste der Kollektionen.
+  # Eine Kollektion wird hier einmal angelegt und kann danach
+  # bei beliebig vielen Produkten ausgewählt werden.
+  - name: collections
+    label: Kollektionen
+    type: collection
+    path: content/collections
+    format: yaml
+
+    filename:
+      template: "{name}.yml"
+      field: false
+
+    view:
+      primary: name
+      fields: [name]
+      sort: [name]
+      search: [name]
+      default:
+        sort: name
+        order: asc
+
+    fields:
+      - name: name
+        label: Name der Kollektion
+        type: string
+        required: true
+        description: "Eine Kollektion nur einmal anlegen, z. B. Meeresrauschen. Danach kann sie bei Produkten ausgewählt werden."
+        options:
+          maxlength: 120
+
   - name: products
     label: Produkte
     type: file
@@ -150,12 +185,17 @@ content:
                   label: Sonstiges
               placeholder: Produktart auswählen
 
+          # Bestehende Kollektionen werden als Vorschläge angeboten.
+          # Gespeichert wird weiterhin nur der Name, z. B. "Meeresrauschen".
           - name: collection
             label: Kollektion
-            type: string
-            description: "Optional, z. B. Eisregen. Gleiche Schreibweise bei zusammengehörigen Stücken verwenden."
+            type: reference
+            description: "Optional. Neue Kollektionen zuerst einmal unter „Kollektionen“ anlegen und hier anschließend auswählen."
             options:
-              maxlength: 120
+              collection: collections
+              search: "name"
+              value: "{primary}"
+              label: "{primary}"
 
           - name: price
             label: Preis in €
@@ -218,7 +258,7 @@ content:
           - name: etsyUrl
             label: Etsy-Link
             type: string
-            description: "Optional. Direkten Link zum konkreten Etsy-Produkt einfügen. Bleibt das Feld leer, kann auf der Website stattdessen „Anfragen“ angeboten werden."
+            description: "Optional. Direkten Link zum konkreten Etsy-Produkt einfügen. Bleibt das Feld leer, wird auf der Website stattdessen „Anfragen“ angeboten."
 
 settings:
   # Vorhandene, noch nicht im Schema enthaltene Schlüssel bleiben beim Speichern erhalten.
