@@ -1,7 +1,4 @@
-from pathlib import Path
-import yaml
-
-content = """# BAT Ceramics – Pages CMS
+# BAT Ceramics – Pages CMS
 # Produktpflege für Handy und Desktop
 # Zentrale Produktdaten: content/products.json
 
@@ -232,13 +229,3 @@ settings:
     identity: app
     templates:
       update: "BAT Ceramics: Inhalte über Pages CMS aktualisiert"
-"""
-
-# Validate YAML
-parsed = yaml.safe_load(content)
-assert isinstance(parsed, dict)
-assert "media" in parsed and "content" in parsed and "settings" in parsed
-
-path = Path("/mnt/data/BAT-Ceramics-pages.yml")
-path.write_text(content, encoding="utf-8")
-print(f"Datei erstellt und YAML erfolgreich validiert: {path}")
