@@ -80,6 +80,24 @@
       "pickupPossible": true,
       "description": "Diese Tasse ist Anfang des Jahres entstanden und Teil einer Serie von sechs Tassen, an denen ich das Henkeln geübt habe. Jede Tasse zeigt dabei ein Stück meines Lernprozesses und meiner Entwicklung.",
       "etsyUrl": "https://www.etsy.com/de/listing/4558903450/handgetopferte-tasse-in-der-farbe?ref=shop_home_feat_1&frs=1&logging_key=37c48613bc454394103fdb6fabc0dbcd2bfebf71%3A4558903450"
+    },
+    {
+      "id": "89c98887-45d0-4f57-b201-2c3c5e8b6afd",
+      "workNumber": "Tasse II 01/2026",
+      "name": "Tasse 2",
+      "status": "Verfügbar",
+      "featured": false,
+      "image": "/media/img9031-1.jpeg",
+      "gallery": [
+        "/media/img9032.jpeg",
+        "/media/img9030-2.jpeg"
+      ],
+      "category": "Tasse",
+      "price": 29,
+      "shipping": "included",
+      "pickupPossible": true,
+      "description": "Diese Tasse ist Anfang des Jahres entstanden und Teil einer Serie von sechs Tassen, an denen ich das Henkeln geübt habe. Jede Tasse zeigt dabei ein Stück meines Lernprozesses und meiner Entwicklung.",
+      "etsyUrl": "https://www.etsy.com/de/listing/4558903450/handgetopferte-tasse-in-der-farbe?ref=shop_home_feat_1&frs=1&logging_key=37c48613bc454394103fdb6fabc0dbcd2bfebf71%3A4558903450"
     }
   ]
 }
