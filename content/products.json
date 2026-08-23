@@ -63,6 +63,23 @@
       "shipping": "included",
       "pickupPossible": true,
       "description": "Trendige Berry Bowl mit integriertem Wascheffekt: Der seitlich einlaufende Wasserstrahl versetzt Obst und Beeren in einen kleinen Strudel und wäscht sie direkt in der Schüssel. Die aufwendige Herstellung macht dieses Stück vorerst zu einem Unikat."
+    },
+    {
+      "id": "ae39b7e6-d14a-4953-9cba-ede74c029e74",
+      "workNumber": "Tasse I 01/2026",
+      "name": "Tasse 1",
+      "status": "Verfügbar",
+      "featured": false,
+      "image": "/media/img9033.jpeg",
+      "gallery": [
+        "/media/img9034.jpeg"
+      ],
+      "category": "Tasse",
+      "price": 29,
+      "shipping": "included",
+      "pickupPossible": true,
+      "description": "Diese Tasse ist Anfang des Jahres entstanden und Teil einer Serie von sechs Tassen, an denen ich das Henkeln geübt habe. Jede Tasse zeigt dabei ein Stück meines Lernprozesses und meiner Entwicklung.",
+      "etsyUrl": "https://www.etsy.com/de/listing/4558903450/handgetopferte-tasse-in-der-farbe?ref=shop_home_feat_1&frs=1&logging_key=37c48613bc454394103fdb6fabc0dbcd2bfebf71%3A4558903450"
     }
   ]
 }
