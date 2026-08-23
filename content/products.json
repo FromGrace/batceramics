@@ -1,45 +1,6 @@
 {
   "products": [
     {
-      "id": "2687c740-547e-43af-95d8-7b71594ded82",
-      "workNumber": "1 / 2026",
-      "name": "Schüssel",
-      "status": "Verfügbar",
-      "featured": true,
-      "image": "/media/img0433.jpg",
-      "gallery": [
-        "/media/img0432.jpg"
-      ],
-      "category": "Schüssel",
-      "price": 20,
-      "shipping": "etsy",
-      "pickupPossible": true,
-      "description": "Schüsel",
-      "videos": [
-        {
-          "title": "Tasse",
-          "youtube": "https://www.youtube.com/watch?v=p6wkSd3h1QQ"
-        },
-        {
-          "title": "Abdrehen",
-          "youtube": "https://www.youtube.com/watch?v=8cfmPGyAWzY"
-        }
-      ],
-      "etsyUrl": "https://www.etsy.com/shop/BatCeramics?ref=dashboard-header"
-    },
-    {
-      "id": "6ceb3435-4b5e-41d4-8401-90910573e84c",
-      "workNumber": "Berry I 05/2026",
-      "name": "Berry Bowl ",
-      "status": "Verfügbar",
-      "featured": false,
-      "category": "Schüssel",
-      "price": 30,
-      "shipping": "included",
-      "pickupPossible": true,
-      "description": "Trendige Berry Bowl mit integriertem Wascheffekt: Der seitlich einlaufende Wasserstrahl versetzt Obst und Beeren in einen kleinen Strudel und wäscht sie direkt in der Schüssel. Die aufwendige Herstellung macht dieses Stück vorerst zu einem Unikat."
-    },
-    {
       "id": "a000b3d5-8798-443b-8626-f31aa64015c3",
       "workNumber": "Ramen I 04/2026",
       "name": "Ramen Schüssel 1",
@@ -90,6 +51,45 @@
       "shipping": "included",
       "pickupPossible": true,
       "description": "Diese Ramenschüssel ist Teil eines individuell gestalteten Vierer-Sets. Zwei kleine Öffnungen dienen sowohl zum Abgießen überschüssiger Soße oder Brühe als auch als praktische Ablage für Essstäbchen. Jede Schüssel ist nach eigenen Ideen gestaltet und ein Unikat."
+    },
+    {
+      "id": "2687c740-547e-43af-95d8-7b71594ded82",
+      "workNumber": "1 / 2026",
+      "name": "Schüssel",
+      "status": "Verfügbar",
+      "featured": true,
+      "image": "/media/img0433.jpg",
+      "gallery": [
+        "/media/img0432.jpg"
+      ],
+      "category": "Schüssel",
+      "price": 20,
+      "shipping": "etsy",
+      "pickupPossible": true,
+      "description": "Schüsel",
+      "videos": [
+        {
+          "title": "Tasse",
+          "youtube": "https://www.youtube.com/watch?v=p6wkSd3h1QQ"
+        },
+        {
+          "title": "Abdrehen",
+          "youtube": "https://www.youtube.com/watch?v=8cfmPGyAWzY"
+        }
+      ],
+      "etsyUrl": "https://www.etsy.com/shop/BatCeramics?ref=dashboard-header"
+    },
+    {
+      "id": "6ceb3435-4b5e-41d4-8401-90910573e84c",
+      "workNumber": "Berry I 05/2026",
+      "name": "Berry Bowl ",
+      "status": "Verfügbar",
+      "featured": false,
+      "category": "Schüssel",
+      "price": 30,
+      "shipping": "included",
+      "pickupPossible": true,
+      "description": "Trendige Berry Bowl mit integriertem Wascheffekt: Der seitlich einlaufende Wasserstrahl versetzt Obst und Beeren in einen kleinen Strudel und wäscht sie direkt in der Schüssel. Die aufwendige Herstellung macht dieses Stück vorerst zu einem Unikat."
     }
   ]
 }
