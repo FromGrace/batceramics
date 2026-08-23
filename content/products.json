@@ -51,6 +51,19 @@
       "shipping": "included",
       "pickupPossible": false,
       "description": "Diese Ramenschüssel ist Teil eines individuell gestalteten Vierer-Sets. Zwei kleine Öffnungen dienen sowohl zum Abgießen überschüssiger Soße oder Brühe als auch als praktische Ablage für Essstäbchen. Jede Schüssel ist nach eigenen Ideen gestaltet und ein Unikat."
+    },
+    {
+      "id": "9161700f-2906-41db-9269-50c34a041148",
+      "workNumber": "Ramen II 04/2026",
+      "name": "Ramen Schüssel 2",
+      "status": "Verfügbar",
+      "featured": false,
+      "category": "Schüssel",
+      "collection": "Ramen Schüssel Set",
+      "price": 30,
+      "shipping": "included",
+      "pickupPossible": true,
+      "description": "Diese Ramenschüssel ist Teil eines individuell gestalteten Vierer-Sets. Zwei kleine Öffnungen dienen sowohl zum Abgießen überschüssiger Soße oder Brühe als auch als praktische Ablage für Essstäbchen. Jede Schüssel ist nach eigenen Ideen gestaltet und ein Unikat."
     }
   ]
 }
