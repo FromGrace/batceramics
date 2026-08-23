@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- BAT CERAMICS BUILD: SCHRITT 13 – RECHT & TECHNIK -->
+<!-- BAT CERAMICS BUILD: SCHRITT 17 – FEINKORREKTUREN -->
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -1256,6 +1256,27 @@
       text-transform:uppercase;
     }
 
+    .product-modal-meta-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px 16px;
+      margin:4px 0 8px;
+      color:var(--gray);
+      font-size:.82rem;
+      line-height:1.45;
+    }
+
+    .product-modal-meta-item{
+      display:inline-flex;
+      gap:5px;
+      align-items:baseline;
+    }
+
+    .product-modal-meta-item strong{
+      color:var(--charcoal);
+      font-weight:800;
+    }
+
     .product-modal-content h2{
       margin:6px 0 14px;
       font-family:Georgia,"Times New Roman",serif;
@@ -1322,9 +1343,12 @@
     }
 
     .product-modal-shipping{
-      margin:14px 0 0;
+      width:100%;
+      margin:-2px 0 0;
       color:var(--gray);
       font-size:.9rem;
+      font-weight:700;
+      line-height:1.45;
     }
 
     .product-modal-process{
@@ -1913,13 +1937,14 @@
 
         <div class="product-modal-content">
           <p class="product-modal-worknumber" id="productModalWorkNumber"></p>
-          <span class="product-tag" id="productModalMeta"></span>
+          <div class="product-modal-meta-list" id="productModalMeta"></div>
           <h2 id="productModalTitle">Keramik-Unikat</h2>
 
           <div class="product-modal-facts">
             <span class="product-status" id="productModalStatus"></span>
             <p class="product-modal-price" id="productModalPrice"></p>
             <p class="product-modal-tax" id="productModalTax">Umsatzsteuerfrei nach § 19 UStG</p>
+            <p class="product-modal-shipping" id="productModalShipping"></p>
           </div>
 
           <div class="product-modal-actions" id="productModalActions"></div>
@@ -1927,7 +1952,6 @@
           <div class="product-modal-story">
             <h3>Zum Stück</h3>
             <p id="productModalDescription"></p>
-            <p class="product-modal-shipping" id="productModalShipping"></p>
           </div>
 
           <div class="product-modal-process" id="productModalProcess" hidden>
@@ -2224,7 +2248,7 @@
     function inquirySubject(product){
       const name=product?.name||"Keramik-Unikat";
       const number=String(product?.workNumber||"").trim();
-      return `Anfrage zu ${name}${number?` · Werkstück ${number}`:""}`;
+      return `Anfrage zu ${name}${number?` · Werkstück: ${number}`:""}`;
     }
 
     function inquiryDefaultMessage(product){
@@ -2232,7 +2256,7 @@
       const number=String(product?.workNumber||"").trim();
       return `Hallo Bat Ceramics,
 
-ich interessiere mich für ${name}${number?` (Werkstück ${number})`:""}.
+ich interessiere mich für ${name}${number?` (Werkstück: ${number})`:""}.
 Ist das Stück noch verfügbar?
 
 Viele Grüße`;
@@ -2307,23 +2331,36 @@ Viele Grüße`;
         plus_shipping:"zzgl. Versandkosten",
         included:"Versand inklusive",
         etsy:"Versandkosten siehe Etsy",
-        pickup_possible:"Abholung möglich",
+        pickup_possible:"",
         pickup_only:"Nur Abholung",
         arrangement:"Versand nach Absprache"
       })[value]||"";
+    }
+
+    function pickupPossible(product){
+      const value=product?.pickupPossible;
+      return value===true || value==="true" || String(product?.shipping||"")==="pickup_possible";
+    }
+
+    function shippingDisplayParts(product){
+      const shipping=shippingLabel(product?.shipping);
+      const shippingNote=String(product?.shippingNote||"").trim();
+      const canPickup=pickupPossible(product) && String(product?.shipping||"")!=="pickup_only";
+
+      return [
+        shipping,
+        canPickup ? "Abholung möglich" : "",
+        shippingNote
+      ].filter(Boolean);
     }
 
     function priceLegalText(product){
       const status=displayStatus(product.status);
       if(status==="In neuem Zuhause" || !formatPrice(product.price)) return "";
 
-      const shipping=shippingLabel(product.shipping);
-      const shippingNote=String(product.shippingNote||"").trim();
-
       return [
         "Umsatzsteuerfrei nach § 19 UStG",
-        shipping,
-        shippingNote
+        ...shippingDisplayParts(product)
       ].filter(Boolean).join(" · ");
     }
 
@@ -2387,14 +2424,16 @@ Viele Grüße`;
       const videos=(Array.isArray(product.videos)?product.videos:[])
         .filter(video=>youtubeId(video?.youtube||""));
       const status=displayStatus(product.status);
-      const shipping=shippingLabel(product.shipping);
-      const shippingNote=String(product.shippingNote||"").trim();
+      const shippingParts=shippingDisplayParts(product);
 
-      productModalWorkNumber.textContent=product.workNumber ? `Werkstück ${product.workNumber}` : "";
+      productModalWorkNumber.textContent=product.workNumber ? `Werkstück: ${product.workNumber}` : "";
       productModalWorkNumber.hidden=!product.workNumber;
-      productModalMeta.textContent=collection
-        ? `${collection} · ${categoryLabel(category)}`
-        : categoryLabel(category);
+      productModalMeta.innerHTML=[
+        `<span class="product-modal-meta-item"><strong>Produktart:</strong> ${escapeHtml(categoryLabel(category))}</span>`,
+        collection
+          ? `<span class="product-modal-meta-item"><strong>Kollektion:</strong> ${escapeHtml(collection)}</span>`
+          : ""
+      ].filter(Boolean).join("");
       productModalTitle.textContent=product.name||"Keramik-Unikat";
       productModalStatus.textContent=status;
       productModalStatus.dataset.status=statusKey(product.status);
@@ -2403,7 +2442,6 @@ Viele Grüße`;
       productModalTax.hidden=!productModalPrice.textContent || status==="In neuem Zuhause";
       productModalDescription.textContent=product.description||"Für dieses Stück ist noch keine Beschreibung hinterlegt.";
 
-      const shippingParts=[shipping,shippingNote].filter(Boolean);
       productModalShipping.textContent=shippingParts.join(" · ");
       productModalShipping.hidden=shippingParts.length===0;
 
@@ -2460,13 +2498,10 @@ Viele Grüße`;
 
       const number=String(product.workNumber||"").trim();
       const price=formatPrice(product.price);
-      const shipping=shippingLabel(product.shipping);
-      const shippingNote=String(product.shippingNote||"").trim();
       const metaParts=[
-        number ? `Werkstück ${number}` : "",
+        number ? `Werkstück: ${number}` : "",
         price,
-        shipping,
-        shippingNote
+        ...shippingDisplayParts(product)
       ].filter(Boolean);
 
       inquiryProductName.textContent=product.name||"Keramik-Unikat";
@@ -2522,7 +2557,7 @@ Viele Grüße`;
               </span>
               <span class="featured-content">
                 <span class="product-tag">${escapeHtml(productTagText(product))}</span>
-                ${workNumber?`<span class="note">Werkstück ${escapeHtml(workNumber)}</span>`:""}
+                ${workNumber?`<span class="note">Werkstück: ${escapeHtml(workNumber)}</span>`:""}
                 <h3>${escapeHtml(product.name||"Keramik-Unikat")}</h3>
                 <p>${escapeHtml(product.description||"")}</p>
                 <span class="price">${escapeHtml(priceText)}</span>
@@ -2691,14 +2726,12 @@ Viele Grüße`;
       const productName=activeInquiryProduct.name||"Keramik-Unikat";
       const number=String(activeInquiryProduct.workNumber||"").trim();
       const price=formatPrice(activeInquiryProduct.price);
-      const shipping=shippingLabel(activeInquiryProduct.shipping);
-      const shippingNote=String(activeInquiryProduct.shippingNote||"").trim();
+      const shippingParts=shippingDisplayParts(activeInquiryProduct);
 
       const details=[
-        `Produkt: ${productName}${number?` · Werkstück ${number}`:""}`,
+        `Produkt: ${productName}${number?` · Werkstück: ${number}`:""}`,
         price ? `Preis: ${price}` : "",
-        shipping ? `Versand: ${shipping}` : "",
-        shippingNote ? `Versandhinweis: ${shippingNote}` : ""
+        shippingParts.length ? `Versand: ${shippingParts.join(" · ")}` : ""
       ].filter(Boolean).join("\n");
 
       const body=[
