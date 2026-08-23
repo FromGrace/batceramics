@@ -53,22 +53,6 @@
       "description": "Diese Ramenschüssel ist Teil eines individuell gestalteten Vierer-Sets. Zwei kleine Öffnungen dienen sowohl zum Abgießen überschüssiger Soße oder Brühe als auch als praktische Ablage für Essstäbchen. Jede Schüssel ist nach eigenen Ideen gestaltet und ein Unikat."
     },
     {
-      "id": "2687c740-547e-43af-95d8-7b71594ded82",
-      "workNumber": "1 / 2026",
-      "name": "Schüssel",
-      "status": "Verfügbar",
-      "featured": true,
-      "image": "/media/img0433.jpg",
-      "gallery": [
-        "/media/img0432.jpg"
-      ],
-      "category": "Schüssel",
-      "price": 20,
-      "shipping": "etsy",
-      "pickupPossible": true,
-      "description": "Schüsel"
-    },
-    {
       "id": "6ceb3435-4b5e-41d4-8401-90910573e84c",
       "workNumber": "Berry I 05/2026",
       "name": "Berry Bowl ",
