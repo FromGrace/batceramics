@@ -66,18 +66,7 @@
       "price": 20,
       "shipping": "etsy",
       "pickupPossible": true,
-      "description": "Schüsel",
-      "videos": [
-        {
-          "title": "Tasse",
-          "youtube": "https://www.youtube.com/watch?v=p6wkSd3h1QQ"
-        },
-        {
-          "title": "Abdrehen",
-          "youtube": "https://www.youtube.com/watch?v=8cfmPGyAWzY"
-        }
-      ],
-      "etsyUrl": "https://www.etsy.com/shop/BatCeramics?ref=dashboard-header"
+      "description": "Schüsel"
     },
     {
       "id": "6ceb3435-4b5e-41d4-8401-90910573e84c",
