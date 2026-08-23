@@ -25,6 +25,17 @@
         }
       ],
       "etsyUrl": "https://www.etsy.com/shop/BatCeramics?ref=dashboard-header"
+    },
+    {
+      "id": "6ceb3435-4b5e-41d4-8401-90910573e84c",
+      "workNumber": "Berry I 05/2026",
+      "name": "Berry Bowl ",
+      "status": "Verfügbar",
+      "featured": false,
+      "category": "Schüssel",
+      "price": 30,
+      "shipping": "included",
+      "description": "Trendige Berry Bowl mit integriertem Wascheffekt: Der seitlich einlaufende Wasserstrahl versetzt Obst und Beeren in einen kleinen Strudel und wäscht sie direkt in der Schüssel. Die aufwendige Herstellung macht dieses Stück vorerst zu einem Unikat."
     }
   ]
 }
