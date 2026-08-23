@@ -43,7 +43,10 @@
       "name": "Ramen Schüssel",
       "status": "Verfügbar",
       "featured": false,
-      "category": "Schüssel"
+      "category": "Schüssel",
+      "price": 30,
+      "shipping": "included",
+      "description": "Diese Ramenschüssel ist Teil eines individuell gestalteten Vierer-Sets. Zwei kleine Öffnungen dienen sowohl zum Abgießen überschüssiger Soße oder Brühe als auch als praktische Ablage für Essstäbchen. Jede Schüssel ist nach eigenen Ideen gestaltet und ein Unikat."
     }
   ]
 }
