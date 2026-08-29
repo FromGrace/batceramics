@@ -111,7 +111,7 @@
       "workNumber": "Tasse IV 01/2026",
       "name": "Tasse 4 ",
       "status": "Verfügbar",
-      "featured": false,
+      "featured": true,
       "image": "/media/img9072.jpeg",
       "category": "Tasse",
       "price": 29,
