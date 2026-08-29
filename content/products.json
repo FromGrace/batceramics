@@ -119,6 +119,26 @@
       "pickupPossible": true,
       "description": "Diese Tasse ist Anfang des Jahres entstanden und Teil einer Serie von sechs Tassen, an denen ich das Henkeln geübt habe. Jede Tasse zeigt dabei ein Stück meines Lernprozesses und meiner Entwicklung.",
       "etsyUrl": "https://www.etsy.com/de/listing/4558903450/handgetopferte-tasse-in-der-farbe?ref=shop_home_feat_1&frs=1&logging_key=37c48613bc454394103fdb6fabc0dbcd2bfebf71%3A4558903450"
+    },
+    {
+      "id": "951d8ba5-1ff2-4669-b01c-7a64385bf313",
+      "workNumber": "Kanne 1",
+      "name": "Kleine Teekanne",
+      "status": "Verfügbar",
+      "featured": true,
+      "image": "/media/img9081.jpeg",
+      "gallery": [
+        "/media/img9074.jpeg",
+        "/media/img9073.jpeg",
+        "/media/img9075.jpeg",
+        "/media/img9076.jpeg"
+      ],
+      "category": "Kanne",
+      "price": 49,
+      "shipping": "included",
+      "pickupPossible": false,
+      "description": "Eine kleine, handgetöpferte Teekanne für besondere Teemomente – perfekt für eine Person und alle, die das Besondere lieben.\n\nDiese Teekanne habe ich Anfang des Jahres selbst getöpfert. Sie fasst ca. 700 ml und erstrahlt in einem wunderschönen Kristallblau. Durch ihre handgemachte Fertigung ist sie ein echtes Unikat und bringt eine ganz eigene, besondere Atmosphäre in die Teestunde.\n\nEin kleines Detail macht diese Kanne für mich ganz besonders: An der Seite befindet sich ein kreisrunder Schönheitsfleck, der während des Brennvorgangs entstanden ist. Dabei ist ein wenig Ton abgeplatzt. Gerade weil die Stelle so regelmäßig und kreisrund geworden ist, wirkt sie fast wie ein kleiner Spiegel oder eine geheimnisvolle Öffnung, in die man in einer Fantasy-Welt vielleicht ein kleines Schmuckstück einsetzen könnte.\n\nFür mich ist dieser kleine Makel deshalb kein Fehler, sondern ein Teil der Geschichte und des Charakters dieser Teekanne. Er macht sie unverwechselbar und verleiht ihr einen Hauch von Fantasy und Magie.",
+      "etsyUrl": "https://www.etsy.com/de/listing/4563043927/kleine-teekanne-700-ml-in-kristallblau?ref=shop_home_feat_3&frs=1&logging_key=a6467d20a185fc0a85a9c6814830be08dd5addbd%3A4563043927"
     }
   ]
 }
