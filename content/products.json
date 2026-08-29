@@ -145,7 +145,7 @@
       "workNumber": "Milchkanne 1",
       "name": "Kleines Milchkännchen",
       "status": "Verfügbar",
-      "featured": false,
+      "featured": true,
       "image": "/media/img9077-1.jpeg",
       "gallery": [
         "/media/img9078.jpeg"
