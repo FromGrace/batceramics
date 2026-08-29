@@ -2034,6 +2034,16 @@
       link.addEventListener("click",closeMenu);
     });
 
+    document.addEventListener("click",event=>{
+      if(
+        mainMenu.classList.contains("open") &&
+        !mainMenu.contains(event.target) &&
+        !menuButton.contains(event.target)
+      ){
+        closeMenu();
+      }
+    });
+
     const heroSlidesContainer=document.querySelector(".hero-slides");
     const heroDotsContainer=document.querySelector(".hero-dots");
     let slides=[...document.querySelectorAll(".hero-slide")];
