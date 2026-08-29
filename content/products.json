@@ -70,10 +70,7 @@
       "name": "Tasse 1",
       "status": "Verfügbar",
       "featured": false,
-      "image": "/media/img9033.jpeg",
-      "gallery": [
-        "/media/img9034.jpeg"
-      ],
+      "image": "/media/img9058.jpeg",
       "category": "Tasse",
       "price": 29,
       "shipping": "included",
@@ -87,11 +84,7 @@
       "name": "Tasse 2",
       "status": "Verfügbar",
       "featured": false,
-      "image": "/media/img9031-1.jpeg",
-      "gallery": [
-        "/media/img9032.jpeg",
-        "/media/img9030-2.jpeg"
-      ],
+      "image": "/media/img9062.jpeg",
       "category": "Tasse",
       "price": 29,
       "shipping": "included",
@@ -105,10 +98,7 @@
       "name": "Tasse 3",
       "status": "Verfügbar",
       "featured": false,
-      "image": "/media/img9029-1.jpeg",
-      "gallery": [
-        "/media/img9028.jpeg"
-      ],
+      "image": "/media/img9065.jpeg",
       "category": "Tasse",
       "price": 29,
       "shipping": "included",
@@ -122,10 +112,6 @@
       "name": "Tasse 4 ",
       "status": "Verfügbar",
       "featured": false,
-      "image": "/media/img9026-1.jpeg",
-      "gallery": [
-        "/media/img9027.jpeg"
-      ],
       "category": "Tasse",
       "price": 29,
       "shipping": "included",
