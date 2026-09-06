@@ -114,7 +114,7 @@
     {
       "id": "a000b3d5-8798-443b-8626-f31aa64015c3",
       "workNumber": "Ramen I 04/2026",
-      "name": "Ramen Schüssel 1",
+      "name": "Ramenschüssel 1",
       "status": "Verfügbar",
       "featured": false,
       "category": "Schüssel",
@@ -127,7 +127,7 @@
     {
       "id": "9161700f-2906-41db-9269-50c34a041148",
       "workNumber": "Ramen II 04/2026",
-      "name": "Ramen Schüssel 2",
+      "name": "Ramenschüssel 2",
       "status": "Verfügbar",
       "featured": false,
       "category": "Schüssel",
@@ -140,7 +140,7 @@
     {
       "id": "b7758b98-90da-475b-b48e-a0e22bcb89b1",
       "workNumber": "Ramen III 04/2026",
-      "name": "Ramen Schüssel 3",
+      "name": "Ramenschüssel 3",
       "status": "Verfügbar",
       "featured": false,
       "category": "Schüssel",
@@ -153,7 +153,7 @@
     {
       "id": "52392d79-ebc0-43a1-b585-d85262852f0a",
       "workNumber": "Ramen IV 04/2026",
-      "name": "Ramen Schüssel 4",
+      "name": "Ramenschüssel 4",
       "status": "Verfügbar",
       "featured": false,
       "category": "Schüssel",
