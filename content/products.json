@@ -162,6 +162,23 @@
       "shipping": "included",
       "pickupPossible": true,
       "description": "Diese Ramenschüssel ist Teil eines individuell gestalteten Vierer-Sets. Zwei kleine Öffnungen dienen sowohl zum Abgießen überschüssiger Soße oder Brühe als auch als praktische Ablage für Essstäbchen. Jede Schüssel ist nach eigenen Ideen gestaltet und ein Unikat."
+    },
+    {
+      "id": "0517f726-c349-4402-a5ac-c93aabb93059",
+      "workNumber": "Bowl 1",
+      "name": "Salatschüssel 1",
+      "status": "Verfügbar",
+      "featured": false,
+      "image": "/media/img9256.jpeg",
+      "gallery": [
+        "/media/img9249.jpeg"
+      ],
+      "category": "Schüssel",
+      "collection": "Geschirrserie Kristallblau",
+      "price": 40,
+      "shipping": "included",
+      "pickupPossible": false,
+      "description": "Ein besonderes Stück für den gedeckten Tisch: Von Hand auf der Töpferscheibe gedreht und außen in wunderschönem Kristallblau glasiert. Die weiße Innenseite bildet einen edlen Kontrast und lässt Salate, Bowls, Obst und andere Leckereien besonders schön zur Geltung kommen.\n\nMit ca. 1 Liter Fassungsvermögen hat die Schüssel eine wunderbar vielseitige Größe.\n\nJede Schüssel ist ein echtes handgefertigtes Unikat – kleine Unterschiede in Form und Glasur machen ihren ganz besonderen Charme aus.\nEin kleines Stück Handwerkskunst für jeden Tag."
     }
   ]
 }
