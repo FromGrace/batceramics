@@ -260,7 +260,7 @@
       "workNumber": "Müsli 3",
       "name": "Müslischüssel 3",
       "status": "Verfügbar",
-      "featured": false,
+      "featured": true,
       "image": "/media/img9279-1.jpeg",
       "gallery": [
         "/media/img9282.jpeg",
