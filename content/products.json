@@ -509,7 +509,7 @@
       "workNumber": "Teller-Set",
       "name": "Frühstücksteller-Set für 5 Personen",
       "status": "Verfügbar",
-      "featured": false,
+      "featured": true,
       "image": "/media/img9496.jpeg",
       "category": "Teller",
       "collection": "Geschirrserie Kristallblau",
