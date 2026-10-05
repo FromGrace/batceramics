@@ -5,7 +5,7 @@
       "workNumber": "Kanne 1",
       "name": "Kleine Teekanne",
       "status": "Verfügbar",
-      "featured": true,
+      "featured": false,
       "image": "/media/img9081.jpeg",
       "gallery": [
         "/media/img9074.jpeg",
@@ -26,7 +26,7 @@
       "workNumber": "Milchkanne 1",
       "name": "Kleines Milchkännchen",
       "status": "Verfügbar",
-      "featured": true,
+      "featured": false,
       "image": "/media/img9077-1.jpeg",
       "gallery": [
         "/media/img9078.jpeg"
