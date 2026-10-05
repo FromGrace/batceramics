@@ -135,12 +135,11 @@
       "workNumber": "Ramen II 04/2026",
       "name": "Ramenschüssel 2",
       "status": "Verfügbar",
-      "featured": false,
-      "image": "/media/img9451.jpeg",
+      "featured": true,
+      "image": "/media/b69900fa-2790-42cd-baec-db10cc253af7-1.png",
       "gallery": [
         "/media/img9456.jpeg",
-        "/media/img9454.jpeg",
-        "/media/b69900fa-2790-42cd-baec-db10cc253af7.png"
+        "/media/img9454.jpeg"
       ],
       "category": "Schüssel",
       "collection": "Ramen Schüssel Set",
