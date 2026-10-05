@@ -154,11 +154,12 @@
       "name": "Ramenschüssel 3",
       "status": "Verfügbar",
       "featured": false,
+      "image": "/media/pastellfarbene-keramikschale-mit-leider-kaputt-stempel.png",
       "category": "Schüssel",
       "collection": "Ramen Schüssel Set",
-      "price": 30,
+      "price": 0,
       "shipping": "included",
-      "pickupPossible": true
+      "pickupPossible": false
     },
     {
       "id": "52392d79-ebc0-43a1-b585-d85262852f0a",
